@@ -1,0 +1,37 @@
+server:
+  port: 8017
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.17.0.1:8001/eureka/
+logging:
+  level:
+    com.blog: debug
+    org.apache.ibatis: debug
+    org: error
+spring:
+  application:
+    name: blog-user
+  mybatis:
+    mapper-locations: common.blog.user.dao.mapper
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:8066/blog?characterEncoding=utf-8           # address
+    username: root                                  # username
+    password: Qwer_1234                            # passwd
+    filters: config,stat
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 5
+      max-wait-millis: 200
+
+blog:
+  common:
+    # @PrintUrlAnno
+    printUrlEnable: true
+    # @PrintUseTimeAnno
+    printUseTimeEnable: true

@@ -27,7 +27,7 @@
         <!--pojo类的生成-->
         <!-- targetProject:JAVA类路径 targetProject:生成的POJO类的包-->
         <!--com.first.pojo路径需要自己创建，即在src/main/java下创建-->
-        <javaModelGenerator targetProject="src/main/java" targetPackage="com.moikiitos.model">
+        <javaModelGenerator targetProject="src/main/java" targetPackage="com.moikiitos.dao.model">
             <!-- 是否生成子包,即pojo下创建javaBean类时是否再建个包 -->
             <property name="enableSubPackages" value="false"/>
             <!-- 设置是否在getter方法中，对String类型字段调用trim()方法，即把两边的空格去掉 -->
@@ -37,7 +37,7 @@
         <!--映射文件生成-->
         <!-- targetProject:配置文件路径 targetPackage:生成映射文件的位置 -->
         <!--com.first.mapper路径也需要自己创建，即在src/main/resources下创建，且必须一层一层创建-->
-        <sqlMapGenerator targetProject="src/main/resources" targetPackage="com.moikiitos.mapper">
+        <sqlMapGenerator targetProject="src/main/resources" targetPackage="com.moikiitos.dao.mapper">
             <!-- 是否生成子包 -->
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
@@ -45,13 +45,14 @@
         <!--持久层接口包生成-->
         <!-- targetPackage：JAVA类路径 targetProject:生成的持久层接口包 -->
         <!--com.first.mapper路径也需要自己创建，即在src/main/java下创建-->
-        <javaClientGenerator targetProject="src/main/java" targetPackage="com.moikiitos.mapper" type="XMLMAPPER">
+        <javaClientGenerator targetProject="src/main/java" targetPackage="com.moikiitos.dao.mapper" type="XMLMAPPER">
             <!-- 是否生成子包 -->
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
         <!-- 数据库表，表名不要和其他库中的表名一样 -->
-        <table tableName="user"></table>
-        <table tableName="relation"></table>
-        <table tableName="user_delete"></table>
+<!--        <table tableName="user"></table>-->
+<!--        <table tableName="relation"></table>-->
+<!--        <table tableName="user_delete"></table>-->
+        <table tableName="blog"></table>
     </context>
 </generatorConfiguration>
