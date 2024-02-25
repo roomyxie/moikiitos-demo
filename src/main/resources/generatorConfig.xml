@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- jdbc的jar包位置，插件需要连接数据库 -->
+    <!--location存放上面讲的那个方法得到的绝对路径-->
+    <classPathEntry location="/Users/xiekuan/Downloads/demo/src/main/resources/mysql-connector-java-8.0.30.jar"/>
+    <!--id随便起，版本用的是MyBatis3-->
+    <context id="default" targetRuntime="MyBatis3">
+        <!-- 是否去除自动生成的注释-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接参数-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/moikiitos"
+                        userId="root"
+                        password="Qwer_1234">
+        </jdbcConnection>
+
+        <!-- 类型处理器，在数据库类型和java类型之间的转换控制-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--pojo类的生成-->
+        <!-- targetProject:JAVA类路径 targetProject:生成的POJO类的包-->
+        <!--com.first.pojo路径需要自己创建，即在src/main/java下创建-->
+        <javaModelGenerator targetProject="src/main/java" targetPackage="com.moikiitos.model">
+            <!-- 是否生成子包,即pojo下创建javaBean类时是否再建个包 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 设置是否在getter方法中，对String类型字段调用trim()方法，即把两边的空格去掉 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--映射文件生成-->
+        <!-- targetProject:配置文件路径 targetPackage:生成映射文件的位置 -->
+        <!--com.first.mapper路径也需要自己创建，即在src/main/resources下创建，且必须一层一层创建-->
+        <sqlMapGenerator targetProject="src/main/resources" targetPackage="com.moikiitos.mapper">
+            <!-- 是否生成子包 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!--持久层接口包生成-->
+        <!-- targetPackage：JAVA类路径 targetProject:生成的持久层接口包 -->
+        <!--com.first.mapper路径也需要自己创建，即在src/main/java下创建-->
+        <javaClientGenerator targetProject="src/main/java" targetPackage="com.moikiitos.mapper" type="XMLMAPPER">
+            <!-- 是否生成子包 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <!-- 数据库表，表名不要和其他库中的表名一样 -->
+        <table tableName="user"></table>
+        <table tableName="relation"></table>
+        <table tableName="user_delete"></table>
+    </context>
+</generatorConfiguration>
