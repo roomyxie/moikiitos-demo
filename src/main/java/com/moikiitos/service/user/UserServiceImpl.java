@@ -2,6 +2,7 @@ package com.moikiitos.service.user;
 
 import com.moikiitos.dao.mapper.UserMapper;
 import com.moikiitos.dao.model.User;
+import com.moikiitos.util.UserRegexUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,13 @@ public class UserServiceImpl implements UserService {
     public List<User> queryUser(String queryString) {
 
         List<User> users = new ArrayList<>();
+        boolean isEmail = UserRegexUtil.isEmail(queryString);
+        if (isEmail) {
+            userMapper.selectByEmail(queryString);
+        } else {
+            userMapper.selectByName(queryString);
+        }
+
         return null;
     }
 }

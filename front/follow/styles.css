@@ -643,3 +643,7 @@
   word-wrap:break-word;
   text-transform:none;
 }
+
+#logout-but {
+  float: right;
+}
