@@ -18,16 +18,16 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public List<User> queryUser(String queryString) {
+    public User queryUser(String queryString) {
 
-        List<User> users = new ArrayList<>();
         boolean isEmail = UserRegexUtil.isEmail(queryString);
+        User user = null;
         if (isEmail) {
-            userMapper.selectByEmail(queryString);
+            user = userMapper.selectByEmail(queryString);
         } else {
-            userMapper.selectByName(queryString);
+            user = userMapper.selectByName(queryString);
         }
 
-        return null;
+        return user;
     }
 }

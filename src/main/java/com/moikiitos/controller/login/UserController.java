@@ -1,10 +1,10 @@
-package com.moikiitos.controller.user;
+package com.moikiitos.controller.login;
 
 import com.moikiitos.common.PrintUrlAnno;
+import com.moikiitos.consts.UserReturnCode;
 import com.moikiitos.service.login.LoginService;
 import com.moikiitos.service.result.BaseResult;
 import com.moikiitos.service.result.WebResult;
-import com.moikiitos.consts.UserReturnCode;
 import io.micrometer.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +18,19 @@ import java.util.Map;
 @RequestMapping("/user")
 @RestController
 @Slf4j
-public class LoginController {
+public class UserController {
     @Autowired
     LoginService loginService;
 
+    /**
+     * function description
+     *
+     * @author xiekuan
+     * @Description login
+     * @date 2/25/24
+     * @param:
+     * @return:
+     */
     @PrintUrlAnno
     @PostMapping("/login")
     public BaseResult login(@RequestBody Map<String, Object> requestMap) {
@@ -59,14 +68,13 @@ public class LoginController {
         BaseResult result = null;
 
         String registerName = (String) requestMap.get("registerName");
-        String registerNameType = (String) requestMap.get("registerNameType");
-        String verificationCode = (String) requestMap.get("verificationCode");
+        String email = (String) requestMap.get("email");
         String registerPassword = (String) requestMap.get("registerPassword");
 
-        log.debug("registerName = " + registerName + "  registerNameType = " + registerNameType + "  verificationCode = " + verificationCode + "  registerPassword = " + registerPassword);
+        log.debug("registerName = " + registerName + "  registerPassword = " + registerPassword);
 
         //do register
-        UserReturnCode returnCode = loginService.register(registerName, registerPassword);
+        UserReturnCode returnCode = loginService.register(registerName, email, registerPassword);
         result = new WebResult(returnCode.getCode(), returnCode.getMessage());
         return result;
     }
@@ -83,6 +91,7 @@ public class LoginController {
     @PrintUrlAnno
     @PostMapping("/logout")
     public BaseResult logout() {
+        System.out.println("logout");
         BaseResult result = null;
         UserReturnCode code = loginService.logout();
         result = new WebResult(code.getCode(), code.getMessage());

@@ -1,4 +1,4 @@
-package com.moikiitos;
+package com.moikiitos.service;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

@@ -25,16 +25,13 @@ public class LoginServiceImpl implements LoginService {
         User user = null;
 
         //get password
-        String oldPassword = "";
-        log.debug("原始密码 = " + password);
-
         if (UserRegexUtil.isMobile(name)) {
-            user = userMapper.selectByPhone(name);
+            user = userMapper.selectByName(name);
         } else if (UserRegexUtil.isEmail(name)) {
             user = userMapper.selectByEmail(name);
         }
 
-        //帐号未注册
+        //not register
         if (user == null) {
             return new BaseResult(UserReturnCode.ACCOUNT_NOT_REGISTER.getCode(), UserReturnCode.ACCOUNT_NOT_REGISTER.getMessage());
         }
@@ -42,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
 
         String random = user.getSalt();
         //hash encrypt
-        String resultPassword = SecurityUtil.md5Hash(password, random, 3).toString();
+        String resultPassword = SecurityUtil.md5Hash(password, random, 3);
 
 
         if (user.getLoginPassword().equals(resultPassword)) {
@@ -58,7 +55,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public UserReturnCode register(String name, String password) {
+    public UserReturnCode register(String name, String email, String password) {
         User user = null;
         log.debug("{}registering.....", name);
 
@@ -68,23 +65,24 @@ public class LoginServiceImpl implements LoginService {
                 return UserReturnCode.ACCOUNT_EXIST;
             }
             user = new User();
-            user.setPhoneNum(name);
+            user.setNickName(name);
             log.debug("The phone ({}) registering", name);
 
-        } else if (UserRegexUtil.isEmail(name)) {
-            if (userMapper.selectIdByEmail(name) != null) {
+        } else if (UserRegexUtil.isEmail(email)) {
+            if (userMapper.selectIdByEmail(email) != null) {
                 return UserReturnCode.ACCOUNT_EXIST;
             }
             user = new User();
-            user.setEmail(name);
+            user.setEmail(email);
             log.debug("The email({}) registering", name);
         }
+        assert user != null;
         log.debug(user.toString());
 
 
         //encrypt password by salt
         String random = new Random().nextInt(999999) + "";
-        //将原始密码加盐（上面生成的盐），并且用md5算法加密三次，将最后结果存入数据库中
+        //salt
         String resultPassword = SecurityUtil.md5Hash(password, random, 3);
         log.debug("Encrypt the password by MD5 = " + resultPassword);
 
@@ -92,7 +90,7 @@ public class LoginServiceImpl implements LoginService {
         user.setLoginPassword(resultPassword);
         user.setSalt(random);
         user.setRegisterTime(new Date());
-        user.setNickName("u" + name);
+        user.setNickName(name);
         log.debug(user.toString());
 
         if (userMapper.insert(user) != 0) {

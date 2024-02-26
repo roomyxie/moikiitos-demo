@@ -1,4 +1,4 @@
-package com.moikiitos;
+package com.moikiitos.controller;
 
 import com.moikiitos.service.login.LoginService;
 import com.moikiitos.service.result.BaseResult;
@@ -15,7 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @SpringBootTest
 @AutoConfigureMockMvc
 @WebAppConfiguration
-public class LoginControllerTest {
+public class RelationControllerTest {
 
     @Before
     public void setupMockMvc() throws Exception {
