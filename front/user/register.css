@@ -1,0 +1,37 @@
+
+body{
+    background-color: #f4f8f7;
+}
+
+
+#register-title{
+    position: absolute;
+    left: 40%;
+    top: 50px;
+}
+
+#register-table{
+    position: absolute;
+    top: 200px;
+    left: 40%;  
+    background-color: beige;
+    width: 400px;
+}
+#register-success-disp{
+    
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 40%; 
+    background-color: beige;
+    width:200px;
+}
+
+.register-lable{
+    display: block;
+    color: #EE2C2C;
+}
+.input-block{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

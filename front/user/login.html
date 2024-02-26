@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="#" />
+        <title>Login</title>
+        <script src="../static/js/jquery/jquery-3.3.1.js"></script>
+       <!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.css">
+        <script src="../static/css/bootstrap/bootstrap.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="login.css">
+        <script src="login.js"></script>
+        
+         <script src="../static/js/common/regex.js"></script>
+        
+          <!-- rsa 加密 -->
+        <script src="../static/js/security/Barrett.js"></script>
+ 	    <script src="../static/js/security/BigInt.js"></script>
+ 	    <script src="../static/js/security/RSA.js"></script>
+
+        <script src="../common/token.js"></script>
+    </head>
+    <body>
+        <div id="login-title">
+             <h1>Moi Kiitos</h1>
+        </div>
+       
+
+        <div id="login-table">
+            <h3>Welcome</h3>
+            <div class="input-block">
+                <div id="login-name">                   
+
+                    <input type="text" id = "login-name-input" placeholder="Please input phone number" value="Name\Email">
+                    <div style="display: none" id="name-input-warn">
+                        <span style="color: red" id="name-input-warn-disp"></span>
+                    </div>
+                </div> 
+            </div>
+        
+            
+            <div class="input-block">
+                <input type="text" id = "login-password-input" placeholder="Password" value="Password">
+                <div style="display: none" id="login-password-input-warn">
+                    <span style="color: red" id="login-password-input-warn-disp"></span>
+                </div>
+            </div>        
+
+            <button  id="login-submit-btn">Submit</button>
+            <div>
+                <span id="login-warn" style="color: red"></span>
+            </div>
+        </div>
+
+        <div id="login-success-disp">          
+            <div>
+                <span>Login success！</span><a href="../index.html">click return to home page</a>
+            </div>
+            
+        </div>
+
+
+    </body>
+
+
+</html>
