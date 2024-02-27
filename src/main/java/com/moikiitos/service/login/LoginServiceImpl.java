@@ -5,7 +5,7 @@ import com.moikiitos.dao.model.User;
 import com.moikiitos.service.result.BaseResult;
 import com.moikiitos.util.SecurityUtil;
 import com.moikiitos.util.UserRegexUtil;
-import com.moikiitos.consts.UserReturnCode;
+import com.moikiitos.common.enums.UserReturnCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +25,10 @@ public class LoginServiceImpl implements LoginService {
         User user = null;
 
         //get password
-        if (UserRegexUtil.isMobile(name)) {
-            user = userMapper.selectByRealName(name);
-        } else if (UserRegexUtil.isEmail(name)) {
+        if (UserRegexUtil.isEmail(name)) {
             user = userMapper.selectByEmail(name);
+        } else {
+            user = userMapper.selectByRealName(name);
         }
 
         //not register
@@ -56,29 +56,22 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public UserReturnCode register(String name, String email, String password) {
-        User user = null;
+        User user = new User();
         log.debug("{}registering.....", name);
         if (userMapper.selectByRealName(name) != null) {
             return UserReturnCode.ACCOUNT_EXIST;
         }
+        user.setRealName(name);
         //check the name whether registered
-        if (UserRegexUtil.isMobile(name)) {
-            if (userMapper.selectByRealName(name) != null) {
+        if (UserRegexUtil.isEmail(email)) {
+            if (userMapper.selectByEmail(email) != null) {
                 return UserReturnCode.ACCOUNT_EXIST;
             }
-            user = new User();
-            user.setRealName(name);
-            log.debug("The phone ({}) registering", name);
-
-        } else if (UserRegexUtil.isEmail(email)) {
-            if (userMapper.selectIdByEmail(email) != null) {
-                return UserReturnCode.ACCOUNT_EXIST;
-            }
-            user = new User();
             user.setEmail(email);
             log.debug("The email({}) registering", name);
+        } else {
+            return UserReturnCode.FORMAT_EMAIL_ERR;
         }
-        assert user != null;
         log.debug(user.toString());
 
 
@@ -92,7 +85,7 @@ public class LoginServiceImpl implements LoginService {
         user.setLoginPassword(resultPassword);
         user.setSalt(random);
         user.setRegisterTime(new Date());
-        user.setNickName(name);
+        user.setNickName("u" + name);
         log.debug(user.toString());
 
         if (userMapper.insert(user) != 0) {

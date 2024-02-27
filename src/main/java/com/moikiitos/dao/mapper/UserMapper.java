@@ -4,7 +4,6 @@ import com.moikiitos.dao.model.User;
 import com.moikiitos.dao.model.UserExample;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -13,25 +12,31 @@ public interface UserMapper {
 
     int deleteByExample(UserExample example);
 
+    int deleteByPrimaryKey(Long userId);
+
     int insert(User record);
 
     int insertSelective(User record);
 
     List<User> selectByExample(UserExample example);
 
+    User selectByPrimaryKey(Long userId);
+
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
     int updateByExample(@Param("record") User record, @Param("example") UserExample example);
 
-    Long selectIdByEmail(String email);
+    int updateByPrimaryKeySelective(User record);
 
-    User selectByRealName(String name);
+    int updateByPrimaryKey(User record);
+
 
     User selectByEmail(String email);
 
-    Integer updateInfoByPrimaryKey(Map<String, Object> map);
+    User selectByRealName(String phone);
 
     User selectUserInfo(Long userId);
 
     List<User> selectUsersInfo(List<Long> userIds);
+
 }

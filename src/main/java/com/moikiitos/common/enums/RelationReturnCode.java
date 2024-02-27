@@ -1,4 +1,4 @@
-package com.moikiitos.consts;
+package com.moikiitos.common.enums;
 
 public enum RelationReturnCode implements ReturnCode {
     //empty 0

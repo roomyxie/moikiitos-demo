@@ -1,9 +1,9 @@
 package com.moikiitos.service.feed;
 
+import com.moikiitos.common.Constants;
 import com.moikiitos.dao.mapper.BlogMapper;
 import com.moikiitos.dao.mapper.UserMapper;
 import com.moikiitos.dao.model.Blog;
-import com.moikiitos.dao.model.BlogExample;
 import com.moikiitos.dao.model.User;
 import com.moikiitos.service.dto.BlogInfoDto;
 import com.moikiitos.util.UserUtil;
@@ -11,16 +11,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 @Slf4j
 @Service
-public class FeedServiceImpl implements FeedService {
+public class BlogServiceImpl implements BlogService {
 
     @Autowired
     HttpServletRequest request;
@@ -54,23 +53,17 @@ public class FeedServiceImpl implements FeedService {
 
 
     @Override
-    public void submit(MultipartHttpServletRequest multiRequest) {
-
-        //博客内容
-        String blogText = multiRequest.getParameter("blog-text");
-        //博客类型
-        String blogType = multiRequest.getParameter("blog-type");
+    public void submit(String content, Long userId) {
 
         //写入数据库
         Blog blog = new Blog();
-        blog.setContent(blogText);
-        //  blog.setCreateTime(new Date());
-        //  blog.setPublishTime(blog.getPublishTime());
-        blog.setType(blogType);
+        blog.setContent(content);
+        blog.setCreateTime(new Date());
+        blog.setPublishTime(blog.getPublishTime());
+        blog.setType(Constants.BLOG_PUBLIC);
         blog.setIsOriginal("true");
-        blog.setUserId(UserUtil.getUserId(request));
+        blog.setUserId(userId);
         long blogId = blogMapper.insert(blog);
-
         log.debug("blogId = {}", blogId);
     }
 }

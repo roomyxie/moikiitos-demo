@@ -1,8 +1,8 @@
 package com.moikiitos.controller.login;
 
 import com.moikiitos.common.PrintUrlAnno;
-import com.moikiitos.consts.RelationReturnCode;
-import com.moikiitos.consts.ReturnCode;
+import com.moikiitos.common.enums.RelationReturnCode;
+import com.moikiitos.common.enums.ReturnCode;
 import com.moikiitos.dao.model.User;
 import com.moikiitos.service.result.BaseResult;
 import com.moikiitos.service.result.WebResult;
@@ -11,10 +11,7 @@ import com.moikiitos.service.user.UserService;
 import com.moikiitos.util.UserUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,82 +29,82 @@ public class UserRelationController {
 
 
     /**
-     *function description
+     * function description
+     *
      * @author xiekuan
-     * @Description  follow Id
+     * @Description follow Id
      * @date 2/26/24
      * @param:
      * @return:
-     *
      */
     @PrintUrlAnno
     @PostMapping("/follow")
-    public BaseResult follow(Long folleeId){
-        if(folleeId == null){
-            return new WebResult(RelationReturnCode.ERROR_PARAM.getCode(),RelationReturnCode.ERROR_PARAM.getMessage());
+    public BaseResult follow(Long followeeId) {
+        if (followeeId == null) {
+            return new WebResult(RelationReturnCode.ERROR_PARAM.getCode(), RelationReturnCode.ERROR_PARAM.getMessage());
         }
-        Long currentUserId =  UserUtil.getUserId(request);
-        ReturnCode returnCode = userRelationService.follow(currentUserId,folleeId);
-        return new WebResult(returnCode.getCode(),returnCode.getMessage());
+        Long currentUserId = UserUtil.getUserId(request);
+        ReturnCode returnCode = userRelationService.follow(currentUserId, followeeId);
+        return new WebResult(returnCode.getCode(), returnCode.getMessage());
     }
 
     /**
-     *function description
+     * function description
+     *
      * @author xiekuan
      * @Description unfollow
      * @date 02/26/24
      * @param:
      * @return:
-     *
      */
 
     @PrintUrlAnno
     @PostMapping("/unfollow")
-    public BaseResult unfollow(Long folleeId){
-        if(folleeId == null){
-            return new WebResult(RelationReturnCode.ERROR_PARAM.getCode(),RelationReturnCode.ERROR_PARAM.getMessage());
+    public BaseResult unfollow(Long followeeId) {
+        if (followeeId == null) {
+            return new WebResult(RelationReturnCode.ERROR_PARAM.getCode(), RelationReturnCode.ERROR_PARAM.getMessage());
         }
 
-        Long currentUserId =  UserUtil.getUserId(request);
-        ReturnCode returnCode = userRelationService.unfollow(currentUserId,folleeId);
-        return new WebResult(WebResult.RESULT_SUCCESS,returnCode.getMessage());
+        Long currentUserId = UserUtil.getUserId(request);
+        ReturnCode returnCode = userRelationService.unfollow(currentUserId, followeeId);
+        return new WebResult(WebResult.RESULT_SUCCESS, returnCode.getMessage());
 
 
     }
 
     /**
-     *function description
+     * function description
+     *
      * @author xiekuan
-     * @Description  get follower list
+     * @Description get follower list
      * @date 02/26/24
      * @param:
      * @return:
-     *
      */
     @PrintUrlAnno
-    @DeleteMapping("/follower/list")
-    public BaseResult listFollower(){
-        Long currentUserId =  UserUtil.getUserId(request);
-        List<User> users =  userRelationService.listFollower(currentUserId);
+    @GetMapping("/follower/list")
+    public BaseResult listFollower(@RequestParam Long userId) {
+        //Long currentUserId = UserUtil.getUserId(request);
+        List<User> users = userRelationService.listFollower(userId);
 
-        return new WebResult(WebResult.RESULT_SUCCESS,"get follower list success",users);
+        return new WebResult(WebResult.RESULT_SUCCESS, "get follower list success", users);
     }
 
     /**
-     *function description
+     * function description
+     *
      * @author xiekuan
-     * @Description  get list of followee
+     * @Description get list of followee
      * @date 2/26/24
      * @param:
      * @return:
-     *
      */
     @PrintUrlAnno
-    @DeleteMapping("/followee/list")
-    public BaseResult listFollowee(){
-        Long currentUserId =  UserUtil.getUserId(request);
-        List<User> users = userRelationService.listFollowee(currentUserId);
+    @GetMapping("/followee/list")
+    public BaseResult listFollowee(@RequestParam Long userId) {
+        // Long currentUserId = UserUtil.getUserId(request);
+        List<User> users = userRelationService.listFollowee(userId);
 
-        return new WebResult(WebResult.RESULT_SUCCESS,"get followee list success",users);
+        return new WebResult(WebResult.RESULT_SUCCESS, "get followee list success", users);
     }
 }

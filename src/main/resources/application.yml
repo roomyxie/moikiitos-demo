@@ -15,11 +15,11 @@ spring:
   application:
     name: moikiitos-blog
   mybatis:
-    mapper-locations: classpath:mappers/*.xml
+    mapper-locations: common.moikiitos.dao.mapper
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:8066/blog?characterEncoding=utf-8           # address
+    url: jdbc:mysql://localhost:3306/moikiitos?characterEncoding=utf-8           # address
     username: root                                  # username
     password: Qwer_1234                            # passwd
     filters: config,stat

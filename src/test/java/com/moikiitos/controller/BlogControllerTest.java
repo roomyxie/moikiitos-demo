@@ -1,10 +1,9 @@
 package com.moikiitos.controller;
 
 import com.alibaba.druid.support.json.JSONUtils;
-import com.moikiitos.dao.model.User;
-import com.moikiitos.service.login.LoginService;
-import com.moikiitos.service.result.BaseResult;
-import com.moikiitos.service.user.UserService;
+import com.alibaba.fastjson.JSON;
+import com.moikiitos.controller.vo.BlogPostReq;
+import com.moikiitos.service.feed.BlogService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,25 +17,15 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 @WebAppConfiguration
-public class SearchControllerTest {
+public class BlogControllerTest {
 
     @Autowired
     private WebApplicationContext context;
@@ -47,37 +36,24 @@ public class SearchControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
 
-
-    @Test
-    public void logout() {
-    }
-
     @Autowired
-    UserService userService;
+    BlogService blogService;
 
 
     @Test
-    public void queryUserControllerTest() {
-        User res = userService.queryUser("323456789");
-        System.out.println(res.toString());
-    }
+    public void postTest() throws Exception {
+       // blogService.submit("test", 5L);
 
-    @Test
-    public void queryUserServiceTest() throws Exception {
-
+        BlogPostReq req = new BlogPostReq();
+        req.setUserId(2L);
+        req.setContent("test1");
+        String reqData = JSON.toJSONString(req);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/search/searchUser")
-                        .requestAttr("userId", 3L)
-                        .param("searchStr", "323456789"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andReturn();
-
-        log.info("\nresult:signature status=[{}]，\nresult = [{}] ",
-                result.getResponse().getStatus(),
-                result.getResponse().getContentAsString());
-
-
+                                .post("/blog/post")
+                                .requestAttr("userId", 2L)
+                                .contentType(MediaType.APPLICATION_JSON_UTF8).content(reqData)
+                ).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+        System.out.println(result.getResponse());
     }
 }
-

@@ -1,4 +1,4 @@
-package com.moikiitos.consts;
+package com.moikiitos.common.enums;
 
 public interface ReturnCode {
 

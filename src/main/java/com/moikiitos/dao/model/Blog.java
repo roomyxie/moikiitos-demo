@@ -9,6 +9,8 @@ public class Blog {
 
     private String content;
 
+    private String videoUrl;
+
     private String type;
 
     private Date createTime;
@@ -39,6 +41,14 @@ public class Blog {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl == null ? null : videoUrl.trim();
     }
 
     public String getType() {

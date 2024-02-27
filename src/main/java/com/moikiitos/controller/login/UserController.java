@@ -1,17 +1,16 @@
 package com.moikiitos.controller.login;
 
 import com.moikiitos.common.PrintUrlAnno;
-import com.moikiitos.consts.UserReturnCode;
+import com.moikiitos.common.enums.UserReturnCode;
+import com.moikiitos.controller.vo.UserLoginReq;
+import com.moikiitos.controller.vo.UserRegisterReq;
 import com.moikiitos.service.login.LoginService;
 import com.moikiitos.service.result.BaseResult;
 import com.moikiitos.service.result.WebResult;
 import io.micrometer.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -33,21 +32,20 @@ public class UserController {
      */
     @PrintUrlAnno
     @PostMapping("/login")
-    public BaseResult login(@RequestBody Map<String, Object> requestMap) {
+    public BaseResult login(@RequestBody UserLoginReq req) {
 
         BaseResult result = null;
 
-        String loginName = (String) requestMap.get("loginName");
-        String loginNameType = (String) requestMap.get("loginNameType");
-        String loginPassword = (String) requestMap.get("loginPassword");
+        String loginName = req.getName();
+        String loginPassword = req.getPassword();
 
 
-        if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(loginNameType) || StringUtils.isEmpty(loginPassword)) {
+        if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(loginPassword)) {
             result = new WebResult(UserReturnCode.ERROR_PARAM.getCode(), UserReturnCode.ERROR_PARAM.getMessage());
             return result;
         }
 
-        log.debug("loginName = " + loginName + "  loginNameType = " + loginNameType + "  loginPassword = " + loginPassword);
+        log.debug("loginName = " + loginName + "  loginPassword = " + loginPassword);
         //do login
         return loginService.login(loginName, loginPassword);
     }
@@ -63,13 +61,13 @@ public class UserController {
      */
     @PrintUrlAnno
     @PostMapping("/register")
-    public BaseResult register(@RequestBody Map<String, Object> requestMap) {
+    public BaseResult register(@RequestBody UserRegisterReq req) {
 
         BaseResult result = null;
 
-        String registerName = (String) requestMap.get("registerName");
-        String email = (String) requestMap.get("email");
-        String registerPassword = (String) requestMap.get("registerPassword");
+        String registerName = req.getName();
+        String email = req.getEmail();
+        String registerPassword = req.getPassword();
 
         log.debug("registerName = " + registerName + "  registerPassword = " + registerPassword);
 
@@ -89,9 +87,8 @@ public class UserController {
      * @return:
      */
     @PrintUrlAnno
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public BaseResult logout() {
-        System.out.println("logout");
         BaseResult result = null;
         UserReturnCode code = loginService.logout();
         result = new WebResult(code.getCode(), code.getMessage());

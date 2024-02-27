@@ -1,7 +1,7 @@
 package com.moikiitos.service.login;
 
 import com.moikiitos.service.result.BaseResult;
-import com.moikiitos.consts.UserReturnCode;
+import com.moikiitos.common.enums.UserReturnCode;
 
 /**
  * function description

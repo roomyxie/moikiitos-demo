@@ -1,6 +1,4 @@
-package com.moikiitos.consts;
-
-import com.moikiitos.consts.ReturnCode;
+package com.moikiitos.common.enums;
 
 /**
  * function description

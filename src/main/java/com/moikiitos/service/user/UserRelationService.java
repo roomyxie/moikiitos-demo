@@ -1,6 +1,6 @@
 package com.moikiitos.service.user;
 
-import com.moikiitos.consts.RelationReturnCode;
+import com.moikiitos.common.enums.RelationReturnCode;
 import com.moikiitos.dao.model.User;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public interface UserRelationService {
      * @param:
      * @return:
      */
-    public RelationReturnCode follow(long userId, long folleeId);
+    public RelationReturnCode follow(Long userId, Long followeeId);
 
     /**
      * function description
@@ -26,19 +26,8 @@ public interface UserRelationService {
      * @param:
      * @return:
      */
-    public RelationReturnCode unfollow(long userId, long folleeId);
+    public RelationReturnCode unfollow(Long userId, Long followeeId);
 
-
-    /**
-     * function description
-     *
-     * @author xiekuan
-     * @Description remove follow
-     * @date 02/24/24
-     * @param:
-     * @return:
-     */
-    public RelationReturnCode removeFollower(long userId, long follerId);
 
     /**
      * function description
@@ -49,7 +38,7 @@ public interface UserRelationService {
      * @param:
      * @return:
      */
-    public List<User> listFollower(long userId);
+    public List<User> listFollower(Long userId);
 
     /**
      * function description
@@ -60,5 +49,5 @@ public interface UserRelationService {
      * @param:
      * @return:
      */
-    public List<User> listFollowee(long userId);
+    public List<User> listFollowee(Long userId);
 }

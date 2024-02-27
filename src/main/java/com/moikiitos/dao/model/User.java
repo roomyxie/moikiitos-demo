@@ -1,13 +1,9 @@
 package com.moikiitos.dao.model;
 
-import lombok.ToString;
-
 import java.util.Date;
 
-
-@ToString
 public class User {
-    private Long id;
+    private Long userId;
 
     private Long userNumber;
 
@@ -19,11 +15,11 @@ public class User {
 
     private String realName;
 
-    private String sex;
+    private String gender;
 
     private Byte age;
 
-    private String headShotUrl;
+    private String headerUrl;
 
     private Byte status;
 
@@ -41,12 +37,12 @@ public class User {
 
     private Integer loginNums;
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getUserNumber() {
@@ -89,12 +85,12 @@ public class User {
         this.realName = realName == null ? null : realName.trim();
     }
 
-    public String getSex() {
-        return sex;
+    public String getGender() {
+        return gender;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
     }
 
     public Byte getAge() {
@@ -105,12 +101,12 @@ public class User {
         this.age = age;
     }
 
-    public String getHeadShotUrl() {
-        return headShotUrl;
+    public String getHeaderUrl() {
+        return headerUrl;
     }
 
-    public void setHeadShotUrl(String headShotUrl) {
-        this.headShotUrl = headShotUrl == null ? null : headShotUrl.trim();
+    public void setHeaderUrl(String headerUrl) {
+        this.headerUrl = headerUrl == null ? null : headerUrl.trim();
     }
 
     public Byte getStatus() {
@@ -175,5 +171,28 @@ public class User {
 
     public void setLoginNums(Integer loginNums) {
         this.loginNums = loginNums;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userNumber=" + userNumber +
+                ", nickName='" + nickName + '\'' +
+                ", loginPassword='" + loginPassword + '\'' +
+                ", salt='" + salt + '\'' +
+                ", realName='" + realName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", headerUrl='" + headerUrl + '\'' +
+                ", status=" + status +
+                ", email='" + email + '\'' +
+                ", emailActive=" + emailActive +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", registerTime=" + registerTime +
+                ", lastLoginTime=" + lastLoginTime +
+                ", updateTime=" + updateTime +
+                ", loginNums=" + loginNums +
+                '}';
     }
 }

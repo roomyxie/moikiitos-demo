@@ -5,8 +5,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
 
-public interface FeedService {
+public interface BlogService {
     List<BlogInfoDto> queryBlog(String type, Long userId, int page, int count);
 
-    void submit(MultipartHttpServletRequest multiRequest);
+    void submit(String content, Long userId);
 }

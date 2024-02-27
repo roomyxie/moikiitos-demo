@@ -1,9 +1,10 @@
-package com.moikiitos.controller.feed;
+package com.moikiitos.controller.blog;
 
 import com.moikiitos.common.PrintUrlAnno;
-import com.moikiitos.consts.BlogReturnCode;
+import com.moikiitos.common.enums.BlogReturnCode;
+import com.moikiitos.controller.vo.BlogPostReq;
 import com.moikiitos.service.dto.BlogInfoDto;
-import com.moikiitos.service.feed.FeedService;
+import com.moikiitos.service.feed.BlogService;
 import com.moikiitos.service.result.BaseResult;
 import com.moikiitos.service.result.WebResult;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("/feed")
+@RequestMapping("/blog")
 @RestController
 @Slf4j
-public class FeedController {
+public class BlogController {
 
     @Autowired
-    FeedService feedService;
+    BlogService blogService;
 
     @PrintUrlAnno
     @PostMapping("/list")
@@ -34,10 +35,22 @@ public class FeedController {
 
         log.debug("queryBlog....");
         // log.debug("userId = " + request.getHeader("userId"));
-        List<BlogInfoDto> blogInfoDtos = feedService.queryBlog(type, 1L, page, count);
+        List<BlogInfoDto> blogInfoDtos = blogService.queryBlog(type, 1L, page, count);
 
         return new WebResult(BlogReturnCode.BLOG_QUERY_SUCCESS.getCode(),
                 BlogReturnCode.BLOG_QUERY_SUCCESS.getMessage(), blogInfoDtos);
+    }
+
+    @PrintUrlAnno
+    @PostMapping("/post")
+    public BaseResult postBlog(@RequestBody BlogPostReq req) {
+
+        log.debug("postBlog....");
+        // log.debug("userId = " + request.getHeader("userId"));
+        blogService.submit(req.getContent(), req.getUserId());
+
+        return new WebResult(BlogReturnCode.BLOG_SUBMIT_SUCCESS.getCode(),
+                BlogReturnCode.BLOG_SUBMIT_SUCCESS.getMessage());
     }
 
 }

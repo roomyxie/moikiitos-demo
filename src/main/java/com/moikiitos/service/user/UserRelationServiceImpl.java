@@ -1,6 +1,6 @@
 package com.moikiitos.service.user;
 
-import com.moikiitos.consts.RelationReturnCode;
+import com.moikiitos.common.enums.RelationReturnCode;
 import com.moikiitos.dao.mapper.RelationMapper;
 import com.moikiitos.dao.mapper.UserMapper;
 import com.moikiitos.dao.model.Relation;
@@ -22,7 +22,7 @@ public class UserRelationServiceImpl implements UserRelationService {
     UserMapper userMapper;
 
     @Override
-    public RelationReturnCode follow(long userId, long followeeId) {
+    public RelationReturnCode follow(Long userId, Long followeeId) {
         Relation relation = new Relation();
         relation.setFollowerid(userId);
         relation.setFolloweeid(followeeId);
@@ -35,7 +35,7 @@ public class UserRelationServiceImpl implements UserRelationService {
     }
 
     @Override
-    public RelationReturnCode unfollow(long userId, long followeeId) {
+    public RelationReturnCode unfollow(Long userId, Long followeeId) {
         Integer result = relationMapper.unfollow(userId, followeeId);
         if (result == null) {
             return RelationReturnCode.UN_FOLLOW_FAIL;
@@ -44,29 +44,20 @@ public class UserRelationServiceImpl implements UserRelationService {
         return RelationReturnCode.UN_FOLLOW_SUCCESS;
     }
 
-    @Override
-    public RelationReturnCode removeFollower(long userId, long followerId) {
-        Integer result = relationMapper.unfollow(followerId, userId);
-        if (result == null) {
-            return RelationReturnCode.REMOVE_FOLLOWER_FAIL;
-        }
-
-        return RelationReturnCode.REMOVE_FOLLOWER_SUCCESS;
-    }
 
     @Override
-    public List<User> listFollower(long followerId) {
+    public List<User> listFollower(Long followerId) {
         List<Long> usedIds = relationMapper.selectAllByFollowerId(followerId);
-        if (usedIds != null) {
+        if (usedIds != null && !usedIds.isEmpty()) {
             return userMapper.selectUsersInfo(usedIds);
         }
         return null;
     }
 
     @Override
-    public List<User> listFollowee(long followerId) {
+    public List<User> listFollowee(Long followerId) {
         List<Long> usedIds = relationMapper.selectAllByFollowerId(followerId);
-        if (usedIds != null) {
+        if (usedIds != null && !usedIds.isEmpty()) {
             return userMapper.selectUsersInfo(usedIds);
         }
         return null;
