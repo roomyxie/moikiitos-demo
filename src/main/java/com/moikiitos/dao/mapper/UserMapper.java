@@ -23,11 +23,9 @@ public interface UserMapper {
 
     int updateByExample(@Param("record") User record, @Param("example") UserExample example);
 
-    Long selectIdByPhone(String phone);
-
     Long selectIdByEmail(String email);
 
-    User selectByName(String phone);
+    User selectByRealName(String name);
 
     User selectByEmail(String email);
 

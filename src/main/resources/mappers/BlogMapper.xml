@@ -245,27 +245,6 @@
         where blog_id = #{blogId,jdbcType=BIGINT}
     </update>
 
-    <delete id="unfollow">
-
-        delete
-        from relation
-        where followerId = #{followerid,jdbcType=BIGINT}
-          and followeeId = #{followeeid,jdbcType=BIGINT}
-    </delete>
-
-    <select id="selectAllByFollowerId" resultType="java.util.List">
-        select followeeId
-        from relation
-        where followerId = #{followerid,jdbcType=BIGINT}
-    </select>
-
-    <select id="selectAllByFolloweeId" resultType="java.util.List">
-        select followerId
-        from relation
-        where followeeId = #{followeeid,jdbcType=BIGINT}
-    </select>
-
-    <!--自定义 -->
     <select id="selectByTypeAndUserId" resultMap="BaseResultMap">
         select blog_id, user_id, content, video_url, type, create_time, publish_time, is_original
         from blog

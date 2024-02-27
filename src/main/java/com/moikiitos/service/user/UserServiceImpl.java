@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
         if (isEmail) {
             user = userMapper.selectByEmail(queryString);
         } else {
-            user = userMapper.selectByName(queryString);
+            user = userMapper.selectByRealName(queryString);
         }
 
         return user;

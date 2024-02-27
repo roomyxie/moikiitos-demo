@@ -26,7 +26,7 @@ public class LoginServiceImpl implements LoginService {
 
         //get password
         if (UserRegexUtil.isMobile(name)) {
-            user = userMapper.selectByName(name);
+            user = userMapper.selectByRealName(name);
         } else if (UserRegexUtil.isEmail(name)) {
             user = userMapper.selectByEmail(name);
         }
@@ -58,14 +58,16 @@ public class LoginServiceImpl implements LoginService {
     public UserReturnCode register(String name, String email, String password) {
         User user = null;
         log.debug("{}registering.....", name);
-
+        if (userMapper.selectByRealName(name) != null) {
+            return UserReturnCode.ACCOUNT_EXIST;
+        }
         //check the name whether registered
         if (UserRegexUtil.isMobile(name)) {
-            if (userMapper.selectIdByPhone(name) != null) {
+            if (userMapper.selectByRealName(name) != null) {
                 return UserReturnCode.ACCOUNT_EXIST;
             }
             user = new User();
-            user.setNickName(name);
+            user.setRealName(name);
             log.debug("The phone ({}) registering", name);
 
         } else if (UserRegexUtil.isEmail(email)) {
