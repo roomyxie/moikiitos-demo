@@ -1,6 +1,5 @@
 var login = {
     //登录名称类型 phone / email
-    "loginNameType": "phone",
     "requestUrl": {
         "loginSubmitUrl": "/user/login",
         //获取 rsa modulus  exponent
@@ -20,22 +19,9 @@ var login = {
         //login commit
         "loginSubmit": function () {
 
-            var sendData = {"loginName": "", "loginPassword": ""};
-            sendData.loginName = $("#login-name-input").val();
-            sendData.loginPassword = $("#login-password-input").val();
-
-            //加密
-            if ((login.rsa.exponent == null)
-                || (login.rsa.modulus == null)) {
-                login.request.requestModulusAndExponent();
-                return;
-            }
-            console.log("encrypt......");
-            setMaxDigits(130);
-            var publicKey = new RSAKeyPair(login.rsa.exponent, "", login.rsa.modulus);
-            var password = encryptedString(publicKey, encodeURIComponent(sendData.loginPassword));
-            console.log("encrypt：" + password);
-            sendData.loginPassword = password;
+            var sendData = {"name": "", "password": ""};
+            sendData.name = $("#login-name-input").val();
+            sendData.password = $("#login-password-input").val();
 
             var jsonData = JSON.stringify(sendData);
             console.log(jsonData);
@@ -48,7 +34,7 @@ var login = {
                 dataType: "json",
                 success: function (data, status) {
                     console.log(data.message);
-                    if (data.code == login.return.LOGIN_SUCCESS.code) {
+                    if (data.code === login.return.LOGIN_SUCCESS.code) {
                         $("#login-table").hide();
                         $("#login-success-disp").show();
                         $("#login-warn").hide();
@@ -71,33 +57,6 @@ var login = {
 
 
         },
-        //获取 rsa modulus  exponent
-    },
-    /**
-     * check phonenumber or email error
-     * return: true:
-     false:
-     */
-    "checkloginName": function () {
-
-        var loginName = $("#login-name-input").val();
-
-        console.log("loginNameType = " + login["loginNameType"]);
-
-        if (login["loginNameType"] == "email") {
-            console.log("isEmail = " + regex.isEmail(loginName));
-            // not the email
-            if (regex.isEmail(loginName) == false) {
-                $("#name-input-warn").show();
-                $("#name-input-warn-disp").text("please input the right email！");
-                console.log("please input the right email！！");
-                return false;
-            } else {
-                $("#name-input-warn").hide();
-            }
-        }
-
-        return true;
     },
     /**
      *检测密码输入
@@ -124,10 +83,6 @@ var login = {
      * check all input
      */
     "checkAllInput": function () {
-        //check phone right
-        if (login.checkloginName() == false) {
-            return false;
-        }
         //check password right
         if (login.checkPassword() == false) {
             return false;
@@ -138,34 +93,13 @@ var login = {
 };
 
 $(function () {
-
-
-    /**
-     * choice login type
-     */
-    $("#login-name-select").click(function () {
-        console.log("login-name-select  click");
-        if ($("#login-name-lable").text() == "phone") {
-            $("#login-name-select").text("phone login");
-            $("#login-name-lable").text("email");
-            login["login-name-type"] = "email";
-            $("#login-name-input").attr("placeholder", "please input the email");
-        } else if ($("#login-name-lable").text() == "email") {
-            $("#login-name-select").text("email login");
-            $("#login-name-lable").text("phone");
-            login["login-name-type"] = "phone";
-            $("#login-name-input").attr("placeholder", "please input phone number");
-        }
-    });
     /**
      * 登录请求提交
      */
     $("#login-submit-btn").click(function () {
         console.log("login-submit-btn click")
         if (login.checkAllInput() == true) {
-
-            login.request.requestModulusAndExponent();
-
+            login.request.loginSubmit();
         }
     });
 });
