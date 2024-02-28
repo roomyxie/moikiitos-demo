@@ -11,7 +11,7 @@ var login = {
     },
     "return": {
         "LOGIN_SUCCESS": {
-            "code": "1000",
+            "code": 1000,
             "message": "login success",
         },
     },
@@ -33,18 +33,19 @@ var login = {
                 data: jsonData,
                 dataType: "json",
                 success: function (data, status) {
-                    console.log(data.message);
-                    if (data.code === login.return.LOGIN_SUCCESS.code) {
+                    console.log(data);
+                    if (data.code == login.return.LOGIN_SUCCESS.code) {
                         $("#login-table").hide();
                         $("#login-success-disp").show();
                         $("#login-warn").hide();
-                        window.location.href = "../blog/blog.html";
+                        sessionStorage.setItem("userId", data.data.userId)
+                        alert("Login successfully")
+                        window.location.href = "../home.html";
                     } else {
                         $("#login-table").show();
                         $("#login-success-disp").hide();
                         $("#login-warn").show();
                         $("#login-warn").text(data.message);
-                        window.location.href = "../blog/blog.html";
                     }
                 }
 

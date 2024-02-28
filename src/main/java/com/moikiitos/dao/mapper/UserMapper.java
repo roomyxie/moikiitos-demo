@@ -30,7 +30,6 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-
     User selectByEmail(String email);
 
     User selectByRealName(String realName);
@@ -38,5 +37,4 @@ public interface UserMapper {
     User selectUserInfo(Long userId);
 
     List<User> selectUsersInfo(List<Long> userIds);
-
 }

@@ -10,6 +10,6 @@ public class BlogListReq {
 
     public int count;
 
-    public Long userId;
+    public long userId;
 
 }

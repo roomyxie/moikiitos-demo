@@ -10,7 +10,6 @@ import com.moikiitos.service.result.BaseResult;
 import com.moikiitos.service.result.WebResult;
 import com.moikiitos.service.user.UserRelationService;
 import com.moikiitos.service.user.UserService;
-import com.moikiitos.util.UserUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -82,7 +81,7 @@ public class UserRelationController {
         }
 
         if (currentUserId.equals(followerId)) {
-            return new WebResult(RelationReturnCode.UN_FOLLOW_FAIL.getCode(), RelationReturnCode.UN_FOLLOW_FAIL.getMessage());
+            return new WebResult(RelationReturnCode.UN_FOLLOW_SAME_FAIL.getCode(), RelationReturnCode.UN_FOLLOW_SAME_FAIL.getMessage());
         }
 
         ReturnCode returnCode = userRelationService.unfollow(currentUserId, followerId);

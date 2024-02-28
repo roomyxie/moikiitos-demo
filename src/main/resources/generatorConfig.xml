@@ -5,7 +5,7 @@
 <generatorConfiguration>
     <!-- jdbc的jar包位置，插件需要连接数据库 -->
     <!--location存放上面讲的那个方法得到的绝对路径-->
-    <classPathEntry location="/Users/xiekuan/Desktop/workspace/code/moikiitos-demo/src/main/resources/mysql-connector-java-8.0.30.jar"/>
+    <classPathEntry location="/Users/xiekuan/Downloads/demo/src/main/resources/mysql-connector-java-8.0.30.jar"/>
     <!--id随便起，版本用的是MyBatis3-->
     <context id="default" targetRuntime="MyBatis3">
         <!-- 是否去除自动生成的注释-->
@@ -47,7 +47,6 @@
         <!-- 数据库表，表名不要和其他库中的表名一样 -->
         <table tableName="user"></table>
         <table tableName="relation"></table>
-<!--        <table tableName="user_delete"></table>-->
         <table tableName="blog"></table>
     </context>
 </generatorConfiguration>

@@ -46,6 +46,7 @@ public class UserController {
         }
 
         log.debug("loginName = " + loginName + "  loginPassword = " + loginPassword);
+
         //do login
         return loginService.login(loginName, loginPassword);
     }
@@ -63,8 +64,6 @@ public class UserController {
     @PostMapping("/register")
     public BaseResult register(@RequestBody UserRegisterReq req) {
 
-        BaseResult result = null;
-
         String registerName = req.getName();
         String email = req.getEmail();
         String registerPassword = req.getPassword();
@@ -73,8 +72,7 @@ public class UserController {
 
         //do register
         UserReturnCode returnCode = loginService.register(registerName, email, registerPassword);
-        result = new WebResult(returnCode.getCode(), returnCode.getMessage());
-        return result;
+        return new WebResult(returnCode.getCode(), returnCode.getMessage());
     }
 
     /**

@@ -2,8 +2,6 @@ package com.moikiitos.service.user;
 
 import com.moikiitos.dao.model.User;
 
-import java.util.List;
-
 public interface UserService {
     /**
      * function description

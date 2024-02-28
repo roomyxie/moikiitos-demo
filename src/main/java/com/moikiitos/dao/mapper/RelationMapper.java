@@ -2,9 +2,7 @@ package com.moikiitos.dao.mapper;
 
 import com.moikiitos.dao.model.Relation;
 import com.moikiitos.dao.model.RelationExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface RelationMapper {

@@ -8,7 +8,7 @@ const defaultTabIndex = 0
 
 // logout
 $('#logoutBtn').click(function () {
-    const APIUrl = `${APIDomain}/user/logout`
+    const APIUrl = `/user/logout`
     const params = {
         data: {}
     }
@@ -36,13 +36,12 @@ function getActiveTabIndex() {
 // search
 $('#btnPost').click(function () {
     var sendData = {"userId": "", "content": ""};
-    // sendData.userId = sessionStorage.getItem("userId");
-    sendData.userId = 2;
+    sendData.userId =  sessionStorage.getItem("userId");
     sendData.content = $('#postContent').val();
 
     var jsonData = JSON.stringify(sendData);
 
-    const APIUrl = `${APIDomain}/blog/post`
+    const APIUrl = `/blog/post`
     axios({
         method: 'post',
         url: APIUrl,
@@ -85,9 +84,12 @@ for (i = 0; i < tabs.length; i++) {
 // list
 function fetchList() {
 
-    let followingAPIUrl = `${APIDomain}/user/relation/followee/list?userId=2`
+    var userId =  sessionStorage.getItem("userId");
 
-    let followersAPIUrl = `${APIDomain}/user/relation/follower/list?userId=2`
+
+    let followingAPIUrl = `${APIDomain}/user/relation/followee/list?userId=` + userId
+
+    let followersAPIUrl = `${APIDomain}/user/relation/follower/list?userId=`+ userId
 
     axios({
         method: 'get',
@@ -121,12 +123,9 @@ function fetchList() {
 function fetchBlogList(type) {
     fetchList('following')
     let APIUrl = ''
-    APIUrl = `${APIDomain}/blog/list`
-    sessionStorage.setItem("userId", 2);
+    APIUrl = `/blog/list`
 
-    var sendData = {"userId": 2, "type": "", "page": 1, "content": 10};
-    // sendData.userId = sessionStorage.getItem("userId");
-    sendData.userId = 2;
+    var sendData = {"userId": "", "type": "", "page": 1, "content": 10};
     sendData.type = "PUBLIC";
 
     var jsonData = JSON.stringify(sendData);
@@ -172,8 +171,8 @@ function fetchBlogList(type) {
                 <td>${nickName}</td>
                 <td>${content}</td>
                 <td>
-                <button id="follow-btn" class="btn btn-primary" onclick="follow()">follow</button>
-                <button id="unfollow-btn" class="btn btn-primary" onclick="unfollow()">unfollow</button>
+                <button id="follow-btn" class="btn btn-primary" value="${userId}" onclick="follow()">follow</button>
+                <button id="unfollow-btn" class="btn btn-primary" value="${userId}" onclick="unfollow()">unfollow</button>
               </tr>
             `)
             }
@@ -183,7 +182,7 @@ function fetchBlogList(type) {
             </table>
           `)
         } else {
-            errorMsg = `操作失败, code: ${response.data.code}, message: ${response.data.message}`
+            errorMsg = `action failed, code: ${response.data.code}, message: ${response.data.message}`
         }
         // 渲染数据
         tabContent.html(errorMsg || html.join(''))
@@ -193,10 +192,17 @@ function fetchBlogList(type) {
     })
 }
 
-function follow() {
+function follow(event) {
+
+    const button = this.v;
+    const index = parseInt(button.getAttribute('data-index'), 10);
+
+    const cell = button.parentNode;
+    // 再通过parentNode找到<tr>行
+    const row = cell.parentNode;
 
     var sendData = {"userId": 2, "followeeId": 3};
-    var followeeId = document.getElementsByTagName('td')[0].textContent;
+    var followeeId = row.gegetElementsByTagName('td')[0].textContent;
 
     sendData.userId = sessionStorage.getItem("userId");
     sendData.followeeId = followeeId;

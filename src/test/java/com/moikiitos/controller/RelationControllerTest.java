@@ -1,7 +1,6 @@
 package com.moikiitos.controller;
 
 import com.moikiitos.common.enums.RelationReturnCode;
-import com.moikiitos.dao.model.User;
 import com.moikiitos.service.user.UserRelationService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -19,7 +18,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Slf4j

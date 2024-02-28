@@ -2,9 +2,7 @@ package com.moikiitos.dao.mapper;
 
 import com.moikiitos.dao.model.Blog;
 import com.moikiitos.dao.model.BlogExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface BlogMapper {
@@ -31,7 +29,7 @@ public interface BlogMapper {
     int updateByPrimaryKey(Blog record);
 
     List<Blog> selectByTypeAndUserId(@Param("type") String type,
-                                     @Param("userId") long userId,
-                                     @Param("start") int start,
-                                     @Param("count") int count);
+                                     @Param("userId") Long userId,
+                                     @Param("start") Integer start,
+                                     @Param("count") Integer count);
 }

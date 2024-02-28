@@ -9,15 +9,11 @@ public class Blog {
 
     private String content;
 
-    private String videoUrl;
-
     private String type;
 
     private Date createTime;
 
     private Date publishTime;
-
-    private String isOriginal;
 
     public Long getBlogId() {
         return blogId;
@@ -43,14 +39,6 @@ public class Blog {
         this.content = content == null ? null : content.trim();
     }
 
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl == null ? null : videoUrl.trim();
-    }
-
     public String getType() {
         return type;
     }
@@ -73,13 +61,5 @@ public class Blog {
 
     public void setPublishTime(Date publishTime) {
         this.publishTime = publishTime;
-    }
-
-    public String getIsOriginal() {
-        return isOriginal;
-    }
-
-    public void setIsOriginal(String isOriginal) {
-        this.isOriginal = isOriginal == null ? null : isOriginal.trim();
     }
 }

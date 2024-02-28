@@ -27,15 +27,11 @@ public class User {
 
     private Byte emailActive;
 
-    private String phoneNum;
-
     private Date registerTime;
 
     private Date lastLoginTime;
 
     private Date updateTime;
-
-    private Integer loginNums;
 
     public Long getUserId() {
         return userId;
@@ -133,14 +129,6 @@ public class User {
         this.emailActive = emailActive;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
-    }
-
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum == null ? null : phoneNum.trim();
-    }
-
     public Date getRegisterTime() {
         return registerTime;
     }
@@ -163,36 +151,5 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Integer getLoginNums() {
-        return loginNums;
-    }
-
-    public void setLoginNums(Integer loginNums) {
-        this.loginNums = loginNums;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userNumber=" + userNumber +
-                ", nickName='" + nickName + '\'' +
-                ", loginPassword='" + loginPassword + '\'' +
-                ", salt='" + salt + '\'' +
-                ", realName='" + realName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", age=" + age +
-                ", headerUrl='" + headerUrl + '\'' +
-                ", status=" + status +
-                ", email='" + email + '\'' +
-                ", emailActive=" + emailActive +
-                ", phoneNum='" + phoneNum + '\'' +
-                ", registerTime=" + registerTime +
-                ", lastLoginTime=" + lastLoginTime +
-                ", updateTime=" + updateTime +
-                ", loginNums=" + loginNums +
-                '}';
     }
 }

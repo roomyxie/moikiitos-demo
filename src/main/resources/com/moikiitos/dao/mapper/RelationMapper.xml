@@ -194,8 +194,9 @@
   </select>
 
   <select id="selectAllByFolloweeId" resultType="Long">
-      select followerId
-      from relation
-      where followeeId = #{followeeId,jdbcType=BIGINT}
+    select followerId
+    from relation
+    where followeeId = #{followeeId,jdbcType=BIGINT}
   </select>
+
 </mapper>

@@ -2,6 +2,7 @@ package com.moikiitos.service.login;
 
 import com.moikiitos.dao.mapper.UserMapper;
 import com.moikiitos.dao.model.User;
+import com.moikiitos.service.dto.UserInfoDto;
 import com.moikiitos.service.result.BaseResult;
 import com.moikiitos.util.SecurityUtil;
 import com.moikiitos.util.UserRegexUtil;
@@ -46,7 +47,13 @@ public class LoginServiceImpl implements LoginService {
             log.debug("{}-password check pass, login success");
         }
 
-        return new BaseResult(UserReturnCode.LOGIN_SUCCESS.getCode(), UserReturnCode.LOGIN_SUCCESS.getMessage());
+        UserInfoDto userInfoDto = UserInfoDto.builder()
+                .userId(user.getUserId())
+                .nickName(user.getNickName())
+                .email(user.getEmail())
+                .build();
+
+        return new BaseResult(UserReturnCode.LOGIN_SUCCESS.getCode(), UserReturnCode.LOGIN_SUCCESS.getMessage(), userInfoDto);
     }
 
     @Override

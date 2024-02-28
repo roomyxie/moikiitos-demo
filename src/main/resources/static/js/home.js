@@ -6,7 +6,7 @@ const defaultTabIndex = 0
 
 // logout
 $('#logoutBtn').click(function () {
-    const APIUrl = `${APIDomain}/user/logout`
+    const APIUrl = `/user/logout`
     const params = {
         data: {}
     }
@@ -14,7 +14,7 @@ $('#logoutBtn').click(function () {
         .then(function (response) {
             console.log(response.data);
             // location to login
-            location.href = `${APIDomain}/user/login.html`
+            location.href = `/user/login.html`
         })
         .catch(function (error) {
             console.error(error);
@@ -34,7 +34,7 @@ function getActiveTabIndex() {
 // search
 $('#btnSearch').click(function () {
     const keyWords = $('#searchKeywords').val() || ''
-    const APIUrl = `${APIDomain}/search/searchUser?searchStr=${keyWords}`
+    const APIUrl = `/search/searchUser?searchStr=${keyWords}`
     const params = {}
 
     const activeTabIndex = getActiveTabIndex()
@@ -119,12 +119,12 @@ for (i = 0; i < tabs.length; i++) {
 function fetchList(type) {
     let APIUrl = ''
     const params = {}
-
+    var userId =  sessionStorage.getItem("userId");
     if (type === 'following') {
-        APIUrl = `${APIDomain}/user/relation/followee/list?userId=2`
+        APIUrl = `${APIDomain}/user/relation/followee/list?userId=` + userId
     }
     if (type === 'followers') {
-        APIUrl = `${APIDomain}/user/relation/follower/list?userId=2`
+        APIUrl = `${APIDomain}/user/relation/follower/list?userId=2` + userId
     }
 
     const activeTabIndex = getActiveTabIndex()

@@ -6,12 +6,10 @@ import com.moikiitos.dao.mapper.UserMapper;
 import com.moikiitos.dao.model.Blog;
 import com.moikiitos.dao.model.User;
 import com.moikiitos.service.dto.BlogInfoDto;
-import com.moikiitos.util.UserUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -30,7 +28,7 @@ public class BlogServiceImpl implements BlogService {
     UserMapper userMapper;
 
     @Override
-    public List<BlogInfoDto> queryBlog(String type, Long userId, int page, int count) {
+    public List<BlogInfoDto> queryBlog(String type, long userId, int page, int count) {
         List<BlogInfoDto> blogInfoDtos = new LinkedList<>();
         log.debug("type ={},userId = {},page={},count={}", type, userId, page, count);
         List<Blog> blogs = blogMapper.selectByTypeAndUserId(type, userId, (page - 1) * count, count);
@@ -39,7 +37,7 @@ public class BlogServiceImpl implements BlogService {
 
             User user = userMapper.selectUserInfo(blog.getUserId());
             BlogInfoDto dto = BlogInfoDto.builder()
-                    .userId(userId)
+                    .userId(user.getUserId())
                     .blogId(blog.getBlogId())
                     .nickName(user.getNickName())
                     .publishTime(blog.getPublishTime())
@@ -62,7 +60,6 @@ public class BlogServiceImpl implements BlogService {
         blog.setCreateTime(new Date());
         blog.setPublishTime(new Date());
         blog.setType(Constants.BLOG_PUBLIC);
-        blog.setIsOriginal("true");
         blog.setUserId(userId);
         long blogId = blogMapper.insert(blog);
         log.debug("blogId = {}", blogId);
