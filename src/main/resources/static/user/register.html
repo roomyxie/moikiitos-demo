@@ -6,22 +6,12 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="#"/>
     <title>Moikiitos</title>
-    <script src="../static/js/jquery/jquery-3.3.1.js"></script>
-    <!-- <script src="js/jquery/jquery-3.3.1.js"></script>-->
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.css">
-    <script src="../static/css/bootstrap/bootstrap.js"></script>
-
+    <script src="../js/jquery/jquery-3.3.1.js"></script>
+    <script src="../js/common/regex.js"></script>
 
     <link rel="stylesheet" type="text/css" href="register.css">
     <script src="register.js"></script>
-    <!-- 自定义正则表达式-->
-    <script src="../static/js/common/regex.js"></script>
 
-
-    <!-- rsa 加密 -->
-    <script src="../static/js/security/Barrett.js"></script>
-    <script src="../static/js/security/BigInt.js"></script>
-    <script src="../static/js/security/RSA.js"></script>
 </head>
 <body>
 <div id="register-title">
@@ -56,7 +46,7 @@
     </div>
 
     <div class="input-block">
-        <input type="text" id="register-password-input-again" placeholder="password confirmation" >
+        <input type="text" id="register-password-input-again" placeholder="password confirmation">
         <div style="display: none" id="password-input-warn">
             <span style="color: red" id="password-input-warn-disp"></span>
         </div>

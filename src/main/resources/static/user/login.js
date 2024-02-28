@@ -38,17 +38,13 @@ var login = {
                         $("#login-table").hide();
                         $("#login-success-disp").show();
                         $("#login-warn").hide();
-                        var tokenVal = data.data;
-                        console.log("token = " + tokenVal);
-                        tokenUtil.setToken(tokenVal);
-
-                        console.log("token = " + tokenUtil.getToken());
-
+                        window.location.href = "../blog/blog.html";
                     } else {
                         $("#login-table").show();
                         $("#login-success-disp").hide();
                         $("#login-warn").show();
                         $("#login-warn").text(data.message);
+                        window.location.href = "../blog/blog.html";
                     }
                 }
 

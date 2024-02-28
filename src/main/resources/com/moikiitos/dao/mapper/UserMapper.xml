@@ -412,7 +412,7 @@
            age, status, email, email_active, phone_num, register_time, last_login_time, login_nums,
            header_url
     from user
-    where real_name = #{real_name,jdbcType=VARCHAR}
+    where real_name = #{realName,jdbcType=VARCHAR}
   </select>
 
   <select id="selectUserInfo" parameterType="java.lang.Long" resultMap="BaseResultMap">

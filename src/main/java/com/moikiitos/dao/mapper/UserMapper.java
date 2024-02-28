@@ -33,7 +33,7 @@ public interface UserMapper {
 
     User selectByEmail(String email);
 
-    User selectByRealName(String phone);
+    User selectByRealName(String realName);
 
     User selectUserInfo(Long userId);
 

@@ -62,7 +62,6 @@ var register = {
                     if (data.code == register.return.REGISTER_SUCCESS.code) {
                         $("#register-table").hide();
                         $("#register-success-disp").show();
-                        window.location.href = "../user/login.html";
                     } else if ((data.code == register.return.ACCOUNT_EXIST.code)
                         || (data.code == register.return.EMAIL_EXIST.code)
                         || (data.code == register.return.REGISTER_FAIL.code)
