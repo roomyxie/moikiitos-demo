@@ -1,12 +1,12 @@
-const APIDomain = 'http://10.35.4.80:8017'
-// tab数组
+const APIDomain = 'http://127.0.0.1:8017'
+
 const tabs = $('#tabs .nav-link')
-// tab内容区数组
+
 const tabContents = $('#tabContent .tab-pane')
-// 默认激活的tab序号
+
 const defaultTabIndex = 0
 
-// 退出
+// logout
 $('#logoutBtn').click(function () {
     const APIUrl = `${APIDomain}/user/logout`
     const params = {
@@ -15,7 +15,7 @@ $('#logoutBtn').click(function () {
     axios.get(APIUrl, params)
         .then(function (response) {
             console.log(response.data);
-            // 跳转到登录页
+            // change to login page
             location.href = `${APIDomain}/user/login.html`
         })
         .catch(function (error) {
@@ -23,7 +23,7 @@ $('#logoutBtn').click(function () {
         });
 })
 
-// 找到当前active的tab序号
+// find current active tab number
 function getActiveTabIndex() {
     for (k = 0; k < tabs.length; k++) {
         if ($(tabs[k]).hasClass('active')) {
@@ -58,7 +58,7 @@ $('#btnPost').click(function () {
     })
 })
 
-// tab点击事件
+// tab click event
 for (i = 0; i < tabs.length; i++) {
     const tabIndex = i
     const currentTab = $(tabs[tabIndex]);
@@ -77,12 +77,12 @@ for (i = 0; i < tabs.length; i++) {
         currentTabContent.addClass('show');
         currentTab.addClass('active');
 
-        // 加载list数据
+        // add list
         fetchList(tabs[tabIndex].name)
     })
 }
 
-// 查询list
+// list
 function fetchList() {
 
     let followingAPIUrl = `${APIDomain}/user/relation/followee/list?userId=2`
@@ -97,7 +97,6 @@ function fetchList() {
         }
     }).then(response => {
         console.log(response);
-        // 更新左侧圆圈数字
         $(`#number-following`).html(response.data.data?.length)
     }).catch(err => {
         console.log(err);
@@ -247,5 +246,4 @@ function unfollow() {
     })
 }
 
-// 默认加载第一个tab的数据
 fetchBlogList()
