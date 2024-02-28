@@ -2,6 +2,8 @@ package com.moikiitos.controller;
 
 import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSON;
+import com.moikiitos.common.Constants;
+import com.moikiitos.controller.vo.BlogListReq;
 import com.moikiitos.controller.vo.BlogPostReq;
 import com.moikiitos.service.feed.BlogService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -42,7 +45,7 @@ public class BlogControllerTest {
 
     @Test
     public void postTest() throws Exception {
-       // blogService.submit("test", 5L);
+        // blogService.submit("test", 5L);
 
         BlogPostReq req = new BlogPostReq();
         req.setUserId(2L);
@@ -50,10 +53,31 @@ public class BlogControllerTest {
         String reqData = JSON.toJSONString(req);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                                .post("/blog/post")
-                                .requestAttr("userId", 2L)
-                                .contentType(MediaType.APPLICATION_JSON_UTF8).content(reqData)
-                ).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+                .post("/blog/post")
+                .requestAttr("userId", 2L)
+                .contentType(MediaType.APPLICATION_JSON_UTF8).content(reqData)
+        ).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
         System.out.println(result.getResponse());
+    }
+
+    @Test
+    public void postListTest() throws Exception {
+        // blogService.submit("test", 5L);
+
+        BlogListReq req = new BlogListReq();
+        req.setUserId(2L);
+        req.setType(Constants.BLOG_PUBLIC);
+        req.setPage(1);
+        req.setCount(10);
+        String reqData = JSON.toJSONString(req);
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                .post("/blog/list")
+                .requestAttr("userId", 2L)
+                .contentType(MediaType.APPLICATION_JSON_UTF8).content(reqData)
+        ).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+        log.info("\nresult:signature status=[{}]，\nresult = [{}] ",
+                result.getResponse().getStatus(),
+                result.getResponse().getContentAsString());
     }
 }

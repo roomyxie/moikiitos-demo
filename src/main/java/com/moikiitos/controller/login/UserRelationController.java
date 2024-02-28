@@ -3,6 +3,8 @@ package com.moikiitos.controller.login;
 import com.moikiitos.common.PrintUrlAnno;
 import com.moikiitos.common.enums.RelationReturnCode;
 import com.moikiitos.common.enums.ReturnCode;
+import com.moikiitos.controller.vo.BlogFollowReq;
+import com.moikiitos.controller.vo.BlogUnFollowReq;
 import com.moikiitos.dao.model.User;
 import com.moikiitos.service.result.BaseResult;
 import com.moikiitos.service.result.WebResult;
@@ -39,11 +41,20 @@ public class UserRelationController {
      */
     @PrintUrlAnno
     @PostMapping("/follow")
-    public BaseResult follow(Long followeeId) {
-        if (followeeId == null) {
-            return new WebResult(RelationReturnCode.ERROR_PARAM.getCode(), RelationReturnCode.ERROR_PARAM.getMessage());
+    public BaseResult follow(@RequestBody BlogFollowReq req) {
+        Long currentUserId = req.getUserId();
+        if (currentUserId == null) {
+            return new WebResult(RelationReturnCode.FOLLOW_FAIL.getCode(), RelationReturnCode.FOLLOW_FAIL.getMessage());
         }
-        Long currentUserId = UserUtil.getUserId(request);
+        Long followeeId = req.getFolloweeId();
+        if (followeeId == null) {
+            return new WebResult(RelationReturnCode.FOLLOW_FAIL.getCode(), RelationReturnCode.FOLLOW_FAIL.getMessage());
+        }
+
+        if (currentUserId.equals(followeeId)) {
+            return new WebResult(RelationReturnCode.FOLLOW_FAIL.getCode(), RelationReturnCode.FOLLOW_FAIL.getMessage());
+        }
+
         ReturnCode returnCode = userRelationService.follow(currentUserId, followeeId);
         return new WebResult(returnCode.getCode(), returnCode.getMessage());
     }
@@ -60,14 +71,22 @@ public class UserRelationController {
 
     @PrintUrlAnno
     @PostMapping("/unfollow")
-    public BaseResult unfollow(Long followeeId) {
-        if (followeeId == null) {
-            return new WebResult(RelationReturnCode.ERROR_PARAM.getCode(), RelationReturnCode.ERROR_PARAM.getMessage());
+    public BaseResult unfollow(@RequestBody BlogUnFollowReq req) {
+        Long currentUserId = req.getUserId();
+        if (currentUserId == null) {
+            return new WebResult(RelationReturnCode.UN_FOLLOW_FAIL.getCode(), RelationReturnCode.UN_FOLLOW_FAIL.getMessage());
+        }
+        Long followerId = req.getFollowerId();
+        if (followerId == null) {
+            return new WebResult(RelationReturnCode.UN_FOLLOW_FAIL.getCode(), RelationReturnCode.UN_FOLLOW_FAIL.getMessage());
         }
 
-        Long currentUserId = UserUtil.getUserId(request);
-        ReturnCode returnCode = userRelationService.unfollow(currentUserId, followeeId);
-        return new WebResult(WebResult.RESULT_SUCCESS, returnCode.getMessage());
+        if (currentUserId.equals(followerId)) {
+            return new WebResult(RelationReturnCode.UN_FOLLOW_FAIL.getCode(), RelationReturnCode.UN_FOLLOW_FAIL.getMessage());
+        }
+
+        ReturnCode returnCode = userRelationService.unfollow(currentUserId, followerId);
+        return new WebResult(returnCode.getCode(), returnCode.getMessage());
 
 
     }

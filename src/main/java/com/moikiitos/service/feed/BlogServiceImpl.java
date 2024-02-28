@@ -40,6 +40,7 @@ public class BlogServiceImpl implements BlogService {
             User user = userMapper.selectUserInfo(blog.getUserId());
             BlogInfoDto dto = BlogInfoDto.builder()
                     .userId(userId)
+                    .blogId(blog.getBlogId())
                     .nickName(user.getNickName())
                     .publishTime(blog.getPublishTime())
                     .content(blog.getContent())
@@ -59,7 +60,7 @@ public class BlogServiceImpl implements BlogService {
         Blog blog = new Blog();
         blog.setContent(content);
         blog.setCreateTime(new Date());
-        blog.setPublishTime(blog.getPublishTime());
+        blog.setPublishTime(new Date());
         blog.setType(Constants.BLOG_PUBLIC);
         blog.setIsOriginal("true");
         blog.setUserId(userId);
