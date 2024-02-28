@@ -1,13 +1,16 @@
 package com.moikiitos.controller.blog;
 
+import com.moikiitos.common.Constants;
 import com.moikiitos.common.PrintUrlAnno;
 import com.moikiitos.common.enums.BlogReturnCode;
+import com.moikiitos.controller.vo.BlogListReq;
 import com.moikiitos.controller.vo.BlogPostReq;
 import com.moikiitos.service.dto.BlogInfoDto;
 import com.moikiitos.service.feed.BlogService;
 import com.moikiitos.service.result.BaseResult;
 import com.moikiitos.service.result.WebResult;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,15 +30,23 @@ public class BlogController {
 
     @PrintUrlAnno
     @PostMapping("/list")
-    public BaseResult queryBlog(@RequestBody Map<String, Object> map) {
+    public BaseResult queryBlog(@RequestBody BlogListReq req) {
 
-        String type = (String) map.get("type");
-        int page = (Integer) map.get("page");
-        int count = (Integer) map.get("count");
+        String type = req.getType();
+        int page = req.getPage();
+        int count = req.getCount();
+        if (Strings.isEmpty(type)) {
+            type = Constants.BLOG_PUBLIC;
+        }
+        if (page == 0) {
+            page = 1;
+        }
+        if (count == 0) {
+            count = 10;
+        }
 
         log.debug("queryBlog....");
-        // log.debug("userId = " + request.getHeader("userId"));
-        List<BlogInfoDto> blogInfoDtos = blogService.queryBlog(type, 1L, page, count);
+        List<BlogInfoDto> blogInfoDtos = blogService.queryBlog(type, req.getUserId(), page, count);
 
         return new WebResult(BlogReturnCode.BLOG_QUERY_SUCCESS.getCode(),
                 BlogReturnCode.BLOG_QUERY_SUCCESS.getMessage(), blogInfoDtos);

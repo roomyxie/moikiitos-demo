@@ -51,6 +51,7 @@ public class UserRelationServiceImpl implements UserRelationService {
         if (usedIds != null && !usedIds.isEmpty()) {
             return userMapper.selectUsersInfo(usedIds);
         }
+
         return null;
     }
 

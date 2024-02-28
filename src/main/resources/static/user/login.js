@@ -43,12 +43,14 @@ var login = {
                         tokenUtil.setToken(tokenVal);
 
                         console.log("token = " + tokenUtil.getToken());
+                        sessionStorage.setItem("UserName", sendData.name);
 
                     } else {
                         $("#login-table").show();
                         $("#login-success-disp").hide();
                         $("#login-warn").show();
                         $("#login-warn").text(data.message);
+                        sessionStorage.setItem("UserName", sendData.name);
                     }
                 }
 
