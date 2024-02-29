@@ -15,10 +15,14 @@ Using SpringBootTest and MockMvc modules
 
 1. User Module
 2. User registration
+![img_1.png](img_1.png)
 3. User login
+![img.png](img.png)
 4. User follow
 5. User unfollow
+![img_2.png](img_2.png)
 6. Blog post
+![img_3.png](img_3.png)
 7. Blog review
 
 ## Installation

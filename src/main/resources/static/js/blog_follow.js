@@ -126,7 +126,7 @@ function fetchList(type) {
         APIUrl = `${APIDomain}/user/relation/followee/list?userId=` + userId
     }
     if (type === 'followers') {
-        APIUrl = `${APIDomain}/user/relation/follower/list?userId=2` + userId
+        APIUrl = `${APIDomain}/user/relation/follower/list?userId=` + userId
     }
 
     const activeTabIndex = getActiveTabIndex()

@@ -66,7 +66,7 @@ public class UserRelationServiceImpl implements UserRelationService {
 
     @Override
     public List<User> listFollowee(Long followerId) {
-        List<Long> usedIds = relationMapper.selectAllByFollowerId(followerId);
+        List<Long> usedIds = relationMapper.selectAllByFolloweeId(followerId);
         if (usedIds != null && !usedIds.isEmpty()) {
             return userMapper.selectUsersInfo(usedIds);
         }
