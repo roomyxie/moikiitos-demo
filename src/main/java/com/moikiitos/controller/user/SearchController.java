@@ -22,13 +22,33 @@ public class SearchController {
     public BaseResult search(@RequestParam String searchStr) {
 
         log.debug("searchStr = " + searchStr);
-        //do login
+        //do query
         User user = userService.queryUser(searchStr);
         if (user == null) {
             return new WebResult(WebResult.RESULT_FAIL, "Don't find user");
         }
         UserInfoDto userInfoDto = UserInfoDto.builder()
                 .userId(user.getUserId())
+                .realName(user.getRealName())
+                .nickName(user.getNickName())
+                .email(user.getEmail())
+                .build();
+        return new WebResult(WebResult.RESULT_SUCCESS, "Search user success", userInfoDto);
+    }
+
+    @PrintUrlAnno
+    @GetMapping("/searchUserById")
+    public BaseResult searchUserById(@RequestParam Long userId) {
+
+        log.debug("search = " + userId);
+        //do query
+        User user = userService.queryUserById(userId);
+        if (user == null) {
+            return new WebResult(WebResult.RESULT_FAIL, "Don't find user");
+        }
+        UserInfoDto userInfoDto = UserInfoDto.builder()
+                .userId(user.getUserId())
+                .realName(user.getRealName())
                 .nickName(user.getNickName())
                 .email(user.getEmail())
                 .build();

@@ -7,10 +7,14 @@ public enum RelationReturnCode implements ReturnCode {
     FOLLOW_SUCCESS(10, "Follow success"),
     FOLLOW_FAIL(11, "Follow failed"),
 
+    FOLLOW_SAME_FAIL(111, "You cannot follow yourself"),
+
+    FOLLOW_FAIL_ALREADY(112, "You are already follow"),
+
     UN_FOLLOW_SUCCESS(12, "Cancel follow success"),
     UN_FOLLOW_FAIL(13, "Cancel follow failed"),
 
-    UN_FOLLOW_SAME_FAIL(13, "You cannot follow yourself"),
+    UN_FOLLOW_SAME_FAIL(131, "You cannot unfollow yourself"),
 
     REMOVE_FOLLOWER_SUCCESS(14, "Remove follower success"),
     REMOVE_FOLLOWER_FAIL(15, "Remove follower failed"),

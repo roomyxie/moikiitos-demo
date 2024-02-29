@@ -50,6 +50,10 @@
       color: #333;
       display: inline-block;
     }
+    .searchKeywords {
+      width: 25px;
+      height: 30px;
+    }
     .tab-content-container {
       text-align: center;
     }
@@ -60,6 +64,7 @@
   <!-- 顶部 -->
   <div class="header">
     <h3>Moi Kiitos</h3>
+    <a href="blog_follow.html">Click to follow page</a>
     <button id="logoutBtn" class="btn btn-danger">Logout</button>
   </div>
 
@@ -87,23 +92,15 @@
       <div class="main col-md-9 card">
         <div class="row" style="margin: 20px 0;">
           <div class="col">
-            <input id="searchKeywords" type="text" class="form-control" placeholder="Search by name/email">
+            <input id="postContent" type="text" class="form-control" placeholder="content">
           </div>
           <div class="col">
-            <button id="btnSearch" class="btn btn-primary">
-              <i class="fas fa-icon2"></i> Search
+            <button id="btnPost" class="btn btn-primary">
+              <i class="fas fa-icon2"></i> Post
             </button>
           </div>
         </div>
-        <!-- 选项卡 -->
-        <ul class="nav nav-tabs" id="tabs" style="padding: 0 15px;">
-          <li class="nav-item">
-            <a class="nav-link active" name="following" data-toggle="tab">Following</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" name="followers" data-toggle="tab">Followers</a>
-          </li>
-        </ul>
+
         <!-- 选项卡内容区 -->
         <div class="tab-content" id="tabContent"  style="padding: 0 15px;">
           <div class="tab-pane fade show active" id="tab-content-1" style="padding: 20px;">
@@ -118,4 +115,4 @@
 
 <script src="./js/axios.min.js"></script>
 <script src="./js/jquery-3.5.1.slim.min.js"></script>
-<script src="./js/home.js"></script>
+<script src="js/blog_page.js"></script>

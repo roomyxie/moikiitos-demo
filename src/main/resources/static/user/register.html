@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="register.css">
     <script src="register.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 
 </head>
 <body>
@@ -41,18 +42,18 @@
 
 
     <div class="input-block">
-        <input type="text" id="register-password-input" placeholder="password">
+        <input type="password" id="register-password-input" placeholder="password">
         <span id="password-strength"></span>
     </div>
 
     <div class="input-block">
-        <input type="text" id="register-password-input-again" placeholder="password confirmation">
+        <input type="password" id="register-password-input-again" placeholder="password confirmation">
         <div style="display: none" id="password-input-warn">
             <span style="color: red" id="password-input-warn-disp"></span>
         </div>
     </div>
 
-    <button id="register-submit-btn">Submit</button>
+    <button id="register-submit-btn" class="btn btn-primary">Submit</button>
     <div>
         <span id="register-warn" style="color: red"></span>
     </div>

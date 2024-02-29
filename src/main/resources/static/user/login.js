@@ -40,7 +40,7 @@ var login = {
                         $("#login-warn").hide();
                         sessionStorage.setItem("userId", data.data.userId)
                         alert("Login successfully")
-                        window.location.href = "../home.html";
+                        window.location.href = "../blog_follow.html";
                     } else {
                         $("#login-table").show();
                         $("#login-success-disp").hide();

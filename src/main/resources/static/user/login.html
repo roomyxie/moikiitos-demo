@@ -14,7 +14,7 @@
 <div id="login-title">
     <h1>Moi Kiitos</h1>
 </div>
-
+<link rel="stylesheet" href="../css/bootstrap.min.css">
 
 <div id="login-table">
     <h3>Welcome</h3>
@@ -36,8 +36,16 @@
         </div>
     </div>
 
-    <button id="login-submit-btn">Submit</button>
-    <button id="register-btn"><a href="../user/register.html">click return to register page</a></button>
+<!--    <button id="login-submit-btn" class="btn btn-primary">Submit</button>-->
+
+    <div class="col">
+        <button id="login-submit-btn" class="btn btn-primary">
+            <i class="fas fa-icon2"></i> Submit
+        </button>
+        <button id="register-btn" class="btn badge-light"><a href="../user/register.html">click return to register page</a>
+
+    </div>
+    </button>
     <div>
         <span id="login-warn" style="color: red"></span>
     </div>

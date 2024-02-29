@@ -28,9 +28,11 @@ public interface RelationMapper {
 
     int updateByPrimaryKey(Relation record);
 
-    int unfollow(@Param("followerId") long userId, @Param("followeeId") long followeeId);
+    int unfollow(@Param("followerId") long followerId, @Param("followeeId") long followeeId);
 
     List<Long> selectAllByFollowerId(@Param("followerId") long followerId);
+
+    List<Relation> selectAllByFollowerIdAndFolloweeId(@Param("followerId") long followerId, @Param("followeeId") long followeeId);
 
     List<Long> selectAllByFolloweeId(@Param("followeeId") long followeeId);
 }

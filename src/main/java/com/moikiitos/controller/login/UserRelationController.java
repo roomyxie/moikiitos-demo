@@ -51,7 +51,7 @@ public class UserRelationController {
         }
 
         if (currentUserId.equals(followeeId)) {
-            return new WebResult(RelationReturnCode.FOLLOW_FAIL.getCode(), RelationReturnCode.FOLLOW_FAIL.getMessage());
+            return new WebResult(RelationReturnCode.FOLLOW_SAME_FAIL.getCode(), RelationReturnCode.FOLLOW_SAME_FAIL.getMessage());
         }
 
         ReturnCode returnCode = userRelationService.follow(currentUserId, followeeId);

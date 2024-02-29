@@ -182,15 +182,23 @@
   <delete id="unfollow" >
 
     delete from relation
-    where followerId = #{followerid,jdbcType=BIGINT}
+    where followerId = #{followerId,jdbcType=BIGINT}
       and
-      followeeId = #{followeeid,jdbcType=BIGINT}
+      followeeId = #{followeeId,jdbcType=BIGINT}
   </delete>
 
   <select id="selectAllByFollowerId" resultType="Long">
     select followeeId
     from relation
     where followerId = #{followerId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAllByFollowerIdAndFolloweeId" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List" />
+    from relation
+    where followerId = #{followerId,jdbcType=BIGINT} and
+      followeeId = #{followeeId,jdbcType=BIGINT}
   </select>
 
   <select id="selectAllByFolloweeId" resultType="Long">

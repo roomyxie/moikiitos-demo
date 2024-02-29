@@ -36,7 +36,7 @@ function getActiveTabIndex() {
 // search
 $('#btnPost').click(function () {
     var sendData = {"userId": "", "content": ""};
-    sendData.userId =  sessionStorage.getItem("userId");
+    sendData.userId = sessionStorage.getItem("userId");
     sendData.content = $('#postContent').val();
 
     var jsonData = JSON.stringify(sendData);
@@ -84,12 +84,12 @@ for (i = 0; i < tabs.length; i++) {
 // list
 function fetchList() {
 
-    var userId =  sessionStorage.getItem("userId");
+    var userId = sessionStorage.getItem("userId");
 
 
     let followingAPIUrl = `${APIDomain}/user/relation/followee/list?userId=` + userId
 
-    let followersAPIUrl = `${APIDomain}/user/relation/follower/list?userId=`+ userId
+    let followersAPIUrl = `${APIDomain}/user/relation/follower/list?userId=` + userId
 
     axios({
         method: 'get',
@@ -121,7 +121,8 @@ function fetchList() {
 
 // 查询list
 function fetchBlogList(type) {
-    fetchList('following')
+    fetchList()
+    searchCurrentUser()
     let APIUrl = ''
     APIUrl = `/blog/list`
 
@@ -171,8 +172,8 @@ function fetchBlogList(type) {
                 <td>${nickName}</td>
                 <td>${content}</td>
                 <td>
-                <button id="follow-btn" class="btn btn-primary" value="${userId}" onclick="follow()">follow</button>
-                <button id="unfollow-btn" class="btn btn-primary" value="${userId}" onclick="unfollow()">unfollow</button>
+                <button id="follow-btn" class="btn btn-primary" onclick="follow(${userId})">follow</button>
+                <button id="unfollow-btn" class="btn btn-primary" onclick="unfollow(${userId})">unfollow</button>
               </tr>
             `)
             }
@@ -192,20 +193,12 @@ function fetchBlogList(type) {
     })
 }
 
-function follow(event) {
-
-    const button = this.v;
-    const index = parseInt(button.getAttribute('data-index'), 10);
-
-    const cell = button.parentNode;
-    // 再通过parentNode找到<tr>行
-    const row = cell.parentNode;
+function follow(userId) {
 
     var sendData = {"userId": 2, "followeeId": 3};
-    var followeeId = row.gegetElementsByTagName('td')[0].textContent;
 
     sendData.userId = sessionStorage.getItem("userId");
-    sendData.followeeId = followeeId;
+    sendData.followeeId = userId;
     var jsonData = JSON.stringify(sendData);
     let followAPIUrl = `${APIDomain}/user/relation/follow`
 
@@ -225,12 +218,10 @@ function follow(event) {
     })
 }
 
-function unfollow() {
+function unfollow(userId) {
     var sendData = {"userId": 2, "followerId": 3};
-    var followerId = document.getElementsByTagName('td')[0].textContent;
-
     sendData.userId = sessionStorage.getItem("userId");
-    sendData.followerId = followerId;
+    sendData.followerId = userId;
 
     var jsonData = JSON.stringify(sendData);
 
@@ -250,6 +241,27 @@ function unfollow() {
         console.log(err);
         alert(err.data.message)
     })
+}
+
+function searchCurrentUser() {
+    var userId = sessionStorage.getItem("userId");
+    const APIUrl = `/search/searchUserById?userId=` + userId
+    const params = {}
+
+
+    axios.get(APIUrl, params)
+        // return success
+        .then(function (response) {
+            console.info(response);
+
+            var h5Element = document.querySelector(".left-menu-title");
+            // 替换h5标签的内容
+            h5Element.innerText = response.data.data.realName;
+
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
 }
 
 fetchBlogList()
