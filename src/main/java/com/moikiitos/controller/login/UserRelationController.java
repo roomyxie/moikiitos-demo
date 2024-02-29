@@ -102,7 +102,9 @@ public class UserRelationController {
     @PrintUrlAnno
     @GetMapping("/follower/list")
     public BaseResult listFollower(@RequestParam Long userId) {
-        //Long currentUserId = UserUtil.getUserId(request);
+        if (userId == null) {
+            return new WebResult(WebResult.RESULT_FAIL, "get followee list failed, userId empty");
+        }
         List<User> users = userRelationService.listFollower(userId);
 
         return new WebResult(WebResult.RESULT_SUCCESS, "get follower list success", users);
@@ -120,7 +122,9 @@ public class UserRelationController {
     @PrintUrlAnno
     @GetMapping("/followee/list")
     public BaseResult listFollowee(@RequestParam Long userId) {
-        // Long currentUserId = UserUtil.getUserId(request);
+        if (userId == null) {
+            return new WebResult(WebResult.RESULT_FAIL, "get followee list failed, userId empty");
+        }
         List<User> users = userRelationService.listFollowee(userId);
 
         return new WebResult(WebResult.RESULT_SUCCESS, "get followee list success", users);

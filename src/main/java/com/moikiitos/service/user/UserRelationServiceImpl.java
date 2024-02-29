@@ -34,8 +34,8 @@ public class UserRelationServiceImpl implements UserRelationService {
         relation.setFollowerid(userId);
         relation.setFolloweeid(followeeId);
         //insert data
-        Integer result = relationMapper.insert(relation);
-        if (result == null) {
+        int result = relationMapper.insert(relation);
+        if (result <= 0) {
             return RelationReturnCode.FOLLOW_FAIL;
         }
 
@@ -45,8 +45,8 @@ public class UserRelationServiceImpl implements UserRelationService {
     @Override
     public RelationReturnCode unfollow(Long followerId, Long followeeId) {
         //check unfollow
-        Integer result = relationMapper.unfollow(followerId, followeeId);
-        if (result == null) {
+        int result = relationMapper.unfollow(followerId, followeeId);
+        if (result <= 0) {
             return RelationReturnCode.UN_FOLLOW_FAIL;
         }
 

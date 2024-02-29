@@ -1,5 +1,6 @@
 package com.moikiitos.controller.blog;
 
+import com.alibaba.fastjson.JSON;
 import com.moikiitos.common.Constants;
 import com.moikiitos.common.PrintUrlAnno;
 import com.moikiitos.common.enums.BlogReturnCode;
@@ -42,7 +43,7 @@ public class BlogController {
             page = 1;
         }
         if (count == 0) {
-            count = 10;
+            count = Integer.MAX_VALUE;
         }
 
         log.debug("queryBlog....");
@@ -56,8 +57,12 @@ public class BlogController {
     @PostMapping("/post")
     public BaseResult postBlog(@RequestBody BlogPostReq req) {
 
-        log.debug("postBlog....");
-        // log.debug("userId = " + request.getHeader("userId"));
+        //error check
+        if (req.getUserId() == null || Strings.isEmpty(req.getContent())) {
+            return new WebResult(BlogReturnCode.ERROR_PARAM.getCode(),
+                    BlogReturnCode.ERROR_PARAM.getMessage());
+        }
+        log.debug("postBlog:" + JSON.toJSON(req));
         blogService.submit(req.getContent(), req.getUserId());
 
         return new WebResult(BlogReturnCode.BLOG_SUBMIT_SUCCESS.getCode(),

@@ -24,8 +24,11 @@ Using SpringBoot 3.2.0
 
 1. Clone the repository: `git clone git@github.com:roomyxie/moikiitos-demo.git`
 2. Navigate to the project directory
-3. Run `mvn clean install` to build the project and download the dependencies
-
+3. Find the document of mysql, imports the DDL includes blog.sql,relation.sql,user.sql to mysql server.
+4. imports the data files [mysql/data]  to mysql server
+5. Run com.moikiitos.MoikiitosApplication in IDEA. Or you can use [moikiitos-0.0.1-SNAPSHOT.jar] start the app
+6. Access link [http://127.0.0.1:8017/user/login.html]
+7. Use 
 ## Usage
 
 1. Run the application using Maven: `mvn spring-boot:run`

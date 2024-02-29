@@ -40,6 +40,9 @@ public class SearchController {
     @GetMapping("/searchUserById")
     public BaseResult searchUserById(@RequestParam Long userId) {
 
+        if (userId == null) {
+            return new WebResult(WebResult.RESULT_FAIL, "Search user failed, userId empty");
+        }
         log.debug("search = " + userId);
         //do query
         User user = userService.queryUserById(userId);
