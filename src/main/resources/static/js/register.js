@@ -1,5 +1,4 @@
 var register = {
-    "registerNameType": "phone",
     "return": {
         "ACCOUNT_EXIST": {
             "code": 1030,
@@ -54,19 +53,18 @@ var register = {
                 url: register.requestUrl.registerSubmitUrl,
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
-                //数据格式是json串,传进一个person
                 data: jsonData,
 
                 success: function (data, status) {
                     console.log(data.message);
-                    if (data.code == register.return.REGISTER_SUCCESS.code) {
+                    if (data.code === register.return.REGISTER_SUCCESS.code) {
                         $("#register-table").hide();
                         $("#register-success-disp").show();
                         alert("Register successfully, please login")
                         window.location.href = "../user/login.html";
-                    } else if ((data.code == register.return.ACCOUNT_EXIST.code)
-                        || (data.code == register.return.EMAIL_EXIST.code)
-                        || (data.code == register.return.REGISTER_FAIL.code)
+                    } else if ((data.code === register.return.ACCOUNT_EXIST.code)
+                        || (data.code === register.return.EMAIL_EXIST.code)
+                        || (data.code === register.return.REGISTER_FAIL.code)
                     ) {
                         $("#register-warn").show();
                         $("#register-warn").text(data.message);
@@ -85,13 +83,13 @@ var register = {
         var passwordAgain = $("#register-password-input-again").val();
         console.log("password.length = " + password.length);
         console.log("passpasswordAgainword.length = " + passwordAgain.length);
-        if ((password.length == 0)
-            || (passwordAgain.length == 0)) {
+        if ((password.length === 0)
+            || (passwordAgain.length === 0)) {
             $("#password-input-warn").show();
             $("#password-input-warn-disp").text("Please input password！");
             return false;
         }
-        if (password != passwordAgain) {
+        if (password !== passwordAgain) {
             $("#password-input-warn").show();
             $("#password-input-warn-disp").text("The password is not same！");
             return false;
@@ -108,7 +106,7 @@ var register = {
      */
     "checkAllInput": function () {
         //check password
-        if (register.checkPasswordEquals() == false) {
+        if (register.checkPasswordEquals() === false) {
             return false;
         }
         console.log("+++all input success++++")
@@ -124,7 +122,7 @@ $(function () {
      * submit
      */
     $("#register-submit-btn").click(function () {
-        if(register.checkAllInput() == true)
+        if(register.checkAllInput() === true)
         {
             register.request.registerSubmit();
         }
@@ -141,11 +139,11 @@ $(function () {
         var strength = regex.checkPasswordStrength(password);
         console.log("possoword =  " + $("#password-strength").text("sample") + password + " strength = " + strength);
 
-        if (strength == 0) {
+        if (strength === 0) {
             $("#password-strength").text("sample");
-        } else if (strength == 1) {
+        } else if (strength === 1) {
             $("#password-strength").text("medium");
-        } else if (strength == 2) {
+        } else if (strength === 2) {
             $("#password-strength").text("complex");
         } else {
             $("#password-strength").text("");

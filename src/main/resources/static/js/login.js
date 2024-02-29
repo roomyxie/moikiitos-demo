@@ -1,9 +1,7 @@
 var login = {
-    //登录名称类型 phone / email
+    //login type name / email
     "requestUrl": {
         "loginSubmitUrl": "/user/login",
-        //获取 rsa modulus  exponent
-        "requestModulusAndExponentUrl": "/user/key",
     },
     "rsa": {
         "modulus": "",
@@ -56,9 +54,9 @@ var login = {
         },
     },
     /**
-     *检测密码输入
-     * return: true: 正常
-     false: 错误
+     *check password input
+     * return: true:
+     false:
      */
     "checkPassword": function () {
         var password = $("#login-password-input").val();
@@ -91,7 +89,7 @@ var login = {
 
 $(function () {
     /**
-     * 登录请求提交
+     * commit login
      */
     $("#login-submit-btn").click(function () {
         console.log("login-submit-btn click")

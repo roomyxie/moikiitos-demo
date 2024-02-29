@@ -1,4 +1,3 @@
-const APIDomain = 'http://127.0.0.1:8017'
 
 const tabs = $('#tabs .nav-link')
 
@@ -16,7 +15,7 @@ $('#logoutBtn').click(function () {
         .then(function (response) {
             console.log(response.data);
             // change to login page
-            location.href = `${APIDomain}/user/login.html`
+            location.href = `/user/login.html`
         })
         .catch(function (error) {
             console.error(error);
@@ -87,9 +86,9 @@ function fetchList() {
     var userId = sessionStorage.getItem("userId");
 
 
-    let followingAPIUrl = `${APIDomain}/user/relation/follower/list?userId=` + userId
+    let followingAPIUrl = `/user/relation/follower/list?userId=` + userId
 
-    let followersAPIUrl = `${APIDomain}/user/relation/followee/list?userId=` + userId
+    let followersAPIUrl = `/user/relation/followee/list?userId=` + userId
 
     axios({
         method: 'get',
@@ -204,7 +203,7 @@ function follow(userId) {
     sendData.userId = sessionStorage.getItem("userId");
     sendData.followeeId = userId;
     var jsonData = JSON.stringify(sendData);
-    let followAPIUrl = `${APIDomain}/user/relation/follow`
+    let followAPIUrl = `/user/relation/follow`
 
     axios({
         method: 'post',
@@ -215,7 +214,8 @@ function follow(userId) {
         }
     }).then(response => {
         console.log(response);
-        alert(response.data.message)
+        alert(response.data.message);
+        location.reload();
     }).catch(err => {
         console.log(err);
         alert(err.data.message)
@@ -229,7 +229,7 @@ function unfollow(userId) {
 
     var jsonData = JSON.stringify(sendData);
 
-    let followAPIUrl = `${APIDomain}/user/relation/unfollow`
+    let followAPIUrl = `/user/relation/unfollow`
 
     axios({
         method: 'post',
@@ -240,7 +240,8 @@ function unfollow(userId) {
         }
     }).then(response => {
         console.log(response);
-        alert(response.data.message)
+        alert(response.data.message);
+        location.reload();
     }).catch(err => {
         console.log(err);
         alert(err.data.message)

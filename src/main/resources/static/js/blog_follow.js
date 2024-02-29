@@ -1,4 +1,3 @@
-const APIDomain = 'http://127.0.0.1:8017'
 
 const tabs = $('#tabs .nav-link')
 const tabContents = $('#tabContent .tab-pane')
@@ -118,15 +117,15 @@ for (i = 0; i < tabs.length; i++) {
 // list
 function fetchList(type) {
     //load current Name
-    searchCurrentUser()
+    searchCurrentUser4FollowPage()
     let APIUrl = ''
     const params = {}
-    var userId =  sessionStorage.getItem("userId");
+    var userId = sessionStorage.getItem("userId");
     if (type === 'following') {
-        APIUrl = `${APIDomain}/user/relation/follower/list?userId=` + userId
+        APIUrl = `/user/relation/follower/list?userId=` + userId
     }
     if (type === 'followers') {
-        APIUrl = `${APIDomain}/user/relation/followee/list?userId=` + userId
+        APIUrl = `/user/relation/followee/list?userId=` + userId
     }
 
     const activeTabIndex = getActiveTabIndex()
@@ -147,6 +146,7 @@ function fetchList(type) {
                 <th scope="col">#</th>
                 <th scope="col">name</th>
                 <th scope="col">email</th>
+                <th scope="col">action</th>
               </tr>
             </thead>
             <tbody>
@@ -155,13 +155,13 @@ function fetchList(type) {
                 const list = response.data.data || []
 
                 for (k = 0; k < list.length; k++) {
-                    const {realName, email} = list[k]
+                    const {realName, userId, email} = list[k]
                     html.push(`
               <tr>
                 <th scope="row">${k + 1}</th>
                 <td>${realName}</td>
                 <td>${email}</td>
-                <td>
+                <td><button id="unfollow-btn" class="btn btn-primary" onclick="unfollow4FollowPage(${userId})">unfollow</button></td>
               </tr>
             `)
                 }
@@ -181,7 +181,34 @@ function fetchList(type) {
         });
 }
 
-function searchCurrentUser() {
+function unfollow4FollowPage(userId) {
+    var sendData = {"userId": 2, "followerId": 3};
+    sendData.userId = sessionStorage.getItem("userId");
+    sendData.followerId = userId;
+
+    var jsonData = JSON.stringify(sendData);
+
+    let followAPIUrl = `/user/relation/unfollow`
+
+    axios({
+        method: 'post',
+        url: followAPIUrl,
+        data: jsonData,
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    }).then(response => {
+        console.log(response);
+        alert(response.data.message);
+        location.reload();
+
+    }).catch(err => {
+        console.log(err);
+        alert(err.data.message)
+    })
+}
+
+function searchCurrentUser4FollowPage() {
     var userId = sessionStorage.getItem("userId");
     const APIUrl = `/search/searchUserById?userId=` + userId
     const params = {}
