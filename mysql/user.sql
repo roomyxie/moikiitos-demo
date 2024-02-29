@@ -13,10 +13,8 @@ CREATE TABLE `user` (
                         `status` tinyint DEFAULT NULL COMMENT 'status',
                         `email` varchar(30) DEFAULT NULL COMMENT 'email',
                         `email_active` tinyint DEFAULT NULL COMMENT 'email whether active',
-                        `phone_num` varchar(20) DEFAULT NULL COMMENT 'phone_num',
                         `register_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'register_time',
                         `last_login_time` datetime DEFAULT NULL COMMENT 'last_login_time',
                         `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'update_time',
-                        `login_nums` int DEFAULT NULL COMMENT 'login_nums',
                         PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COMMENT='user info';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COMMENT='user info';
