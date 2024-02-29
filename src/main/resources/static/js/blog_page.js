@@ -87,9 +87,9 @@ function fetchList() {
     var userId = sessionStorage.getItem("userId");
 
 
-    let followingAPIUrl = `${APIDomain}/user/relation/followee/list?userId=` + userId
+    let followingAPIUrl = `${APIDomain}/user/relation/follower/list?userId=` + userId
 
-    let followersAPIUrl = `${APIDomain}/user/relation/follower/list?userId=` + userId
+    let followersAPIUrl = `${APIDomain}/user/relation/followee/list?userId=` + userId
 
     axios({
         method: 'get',
@@ -126,9 +126,10 @@ function fetchBlogList(type) {
     let APIUrl = ''
     APIUrl = `/blog/list`
 
-    var sendData = {"userId": "", "type": "", "page": 1, "content": 10};
+    var sendData = {"currentUserId": "", "type": "", "page": 1, "content": 10};
     sendData.type = "PUBLIC";
-
+    var currentUserId = sessionStorage.getItem("userId");
+    sendData.currentUserId = currentUserId;
     var jsonData = JSON.stringify(sendData);
 
     const activeTabIndex = getActiveTabIndex()
@@ -152,9 +153,9 @@ function fetchBlogList(type) {
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">userId</th>
-                <th scope="col">nickName</th>
+                <th scope="col">name</th>
                 <th scope="col">content</th>
+                <th scope="col">publishTime</th>
                 <th scope="col">action</th>
               </tr>
             </thead>
@@ -164,16 +165,19 @@ function fetchBlogList(type) {
             const list = response.data.data || []
 
             for (k = 0; k < list.length; k++) {
-                const {userId, nickName, content} = list[k]
+                const {userId, nickName, content, publishTime, enableFollow} = list[k]
+
+                let buttonsHtml = userId !== parseInt(currentUserId, 10) ? `
+        <button id="follow-btn" class="btn btn-primary" onclick="follow(${userId})">follow</button>
+        <button id="unfollow-btn" class="btn btn-primary" onclick="unfollow(${userId})">unfollow</button>
+    ` : '';
                 html.push(`
               <tr>
                 <th scope="row">${k + 1}</th>
-                <td>${userId}</td>
                 <td>${nickName}</td>
                 <td>${content}</td>
-                <td>
-                <button id="follow-btn" class="btn btn-primary" onclick="follow(${userId})">follow</button>
-                <button id="unfollow-btn" class="btn btn-primary" onclick="unfollow(${userId})">unfollow</button>
+                <td>${publishTime}</td>
+                <td>${buttonsHtml}</td>
               </tr>
             `)
             }

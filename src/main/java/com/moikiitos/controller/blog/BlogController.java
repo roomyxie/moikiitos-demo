@@ -47,7 +47,7 @@ public class BlogController {
         }
 
         log.debug("queryBlog....");
-        List<BlogInfoDto> blogInfoDtos = blogService.queryBlog(type, req.getUserId(), page, count);
+        List<BlogInfoDto> blogInfoDtos = blogService.queryBlog(type, req.getCurrentUserId(), req.getSearchUserId(), page, count);
 
         return new WebResult(BlogReturnCode.BLOG_QUERY_SUCCESS.getCode(),
                 BlogReturnCode.BLOG_QUERY_SUCCESS.getMessage(), blogInfoDtos);

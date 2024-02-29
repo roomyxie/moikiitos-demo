@@ -1,5 +1,7 @@
 package com.moikiitos.service.login;
 
+import com.moikiitos.common.enums.EmailStatusCode;
+import com.moikiitos.common.enums.UserStatusCode;
 import com.moikiitos.dao.mapper.UserMapper;
 import com.moikiitos.dao.model.User;
 import com.moikiitos.service.dto.UserInfoDto;
@@ -43,16 +45,20 @@ public class LoginServiceImpl implements LoginService {
         String resultPassword = SecurityUtil.md5Hash(password, random, 3);
 
 
-        if (user.getLoginPassword().equals(resultPassword)) {
-            log.debug("{}-password check pass, login success");
+        if (!user.getLoginPassword().equals(resultPassword)) {
+            return new BaseResult(UserReturnCode.LOGIN_PASSWORD_ERR.getCode(), UserReturnCode.LOGIN_PASSWORD_ERR.getMessage());
         }
+
+        user.setLastLoginTime(new Date());
+        //save login time
+        userMapper.updateByPrimaryKey(user);
 
         UserInfoDto userInfoDto = UserInfoDto.builder()
                 .userId(user.getUserId())
                 .nickName(user.getNickName())
                 .email(user.getEmail())
                 .build();
-
+        log.debug("{}-password check pass, login success");
         return new BaseResult(UserReturnCode.LOGIN_SUCCESS.getCode(), UserReturnCode.LOGIN_SUCCESS.getMessage(), userInfoDto);
     }
 
@@ -89,12 +95,16 @@ public class LoginServiceImpl implements LoginService {
         log.debug("Encrypt the password by MD5 = " + resultPassword);
 
 
+        //build model
         user.setLoginPassword(resultPassword);
         user.setSalt(random);
         user.setRegisterTime(new Date());
         user.setNickName("u" + name);
+        user.setStatus(UserStatusCode.USER_STATUS_NORMAL.getCode().byteValue());
+        user.setEmailActive(EmailStatusCode.EMAIL_STATUS_ACTIVE.getCode().byteValue());
         log.debug(user.toString());
 
+        //save
         if (userMapper.insert(user) != 0) {
             return UserReturnCode.REGISTER_SUCCESS;
         }

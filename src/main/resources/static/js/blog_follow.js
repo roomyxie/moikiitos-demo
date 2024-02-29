@@ -123,10 +123,10 @@ function fetchList(type) {
     const params = {}
     var userId =  sessionStorage.getItem("userId");
     if (type === 'following') {
-        APIUrl = `${APIDomain}/user/relation/followee/list?userId=` + userId
+        APIUrl = `${APIDomain}/user/relation/follower/list?userId=` + userId
     }
     if (type === 'followers') {
-        APIUrl = `${APIDomain}/user/relation/follower/list?userId=` + userId
+        APIUrl = `${APIDomain}/user/relation/followee/list?userId=` + userId
     }
 
     const activeTabIndex = getActiveTabIndex()
