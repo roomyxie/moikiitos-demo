@@ -1,0 +1,191 @@
+commit 11565652f694ff12ee6cb6bc4f49d936a480646b
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Thu Feb 29 15:01:17 2024 +0800
+
+    comment：
+    1, Added the DDL files and the DML data
+    2, Changed the location of css and js files
+
+commit c677620a2c75735228ab2e08ddc81df0aa635a2b
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Thu Feb 29 14:36:34 2024 +0800
+
+    comment：
+    1, Updated front js, fixed the problems about login\register
+    2, Added interface about searchUser
+
+commit 30ddcf8e2cf8cdcf5efe7d609bd97919c62d87a2
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Thu Feb 29 09:26:18 2024 +0800
+
+    comments:
+    1,Updated blog and user table columns
+
+commit 2ef34ca763a4634041b836299fa5cf0118046f1c
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Wed Feb 28 22:45:19 2024 +0800
+
+    comments:
+    1,Fixed blog front post problem
+    2, Delete some of columns from mysql
+    3,Fixed some service problem
+    4,Added ddl
+
+commit ffcb453466a5baf59203b68dedb4db5c01906bea
+Merge: c1c7533 09fb48d
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Wed Feb 28 19:40:47 2024 +0800
+
+    Merge remote-tracking branch 'origin/dev-demo' into dev-demo
+    
+    # Conflicts:
+    #       src/main/resources/static/user/login.js
+
+commit c1c753372518ff05e31195f575705836d0b186a9
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Wed Feb 28 19:36:51 2024 +0800
+
+    comments:
+    1,Fixed login and register problem
+
+commit 09fb48dfcaaa794e3aaafa2c8271c33ddbbf8550
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Wed Feb 28 17:30:19 2024 +0800
+
+    comment：
+    1, Added sql file
+    2,Add git log
+
+commit e35dab218b6eea9e6db9e2e7aa3d180942ffcf7b
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Wed Feb 28 17:04:56 2024 +0800
+
+    comment：
+    1, Fixed javascript file. remove error log
+
+commit 95c7a03aa6b514188d294d98c5b646961002832f
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Wed Feb 28 16:57:51 2024 +0800
+
+    comment：
+    1, Added README.md
+    2, Delete test file
+
+commit a9920da2f102a2aef322fcf0e125aef4dbbfa993
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Wed Feb 28 16:32:56 2024 +0800
+
+    Create README.md
+
+commit 7ce67e1ad11f9e0c775b25c031ee009ee00441d7
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Wed Feb 28 16:12:00 2024 +0800
+
+    comment：
+    1, Added front html+js file, include blog post\follow\unfollow
+    2, Fixed Blog UserRelation input vo problems, change to vo service
+
+commit 476efc79c59f488f2daedb1c73304d7ffb9417ce
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Tue Feb 27 18:29:53 2024 +0800
+
+    comment：
+    1, Added login html\register test
+
+commit 673ebfb1592f7b27dfb8f49b4cd5bd34a00dd4b0
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Tue Feb 27 17:31:56 2024 +0800
+
+    comment：
+    1, Added mapper.xml includes blog relation user
+
+commit 3283c6ef0300e7f634960ce03b8e6c40b95b44c4
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Tue Feb 27 17:18:49 2024 +0800
+
+    comment：
+    1，Fixed register request to VO bean. don't use map
+    2, Added BlogService submit function
+    3, Added Search user test
+    4, Fixed login user input params
+    5, Added user relation problems
+
+commit 52bf4956e40b141f02fbaf57a7c4aa00485fdc42
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Tue Feb 27 09:36:30 2024 +0800
+
+    comments:
+    1,Fixed cannot find bean problems
+    2,Added UserService queryUser function
+
+commit b5baf888b6247f762cb80ffb7184697c54183ad1
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Mon Feb 26 21:56:04 2024 +0800
+
+    comments:
+    1,Added blog post controller\service
+    2,Added blog describe controller\service
+    3,Fixed login\ register test sample
+    4,Fixed RelationController some problems
+    5,Added UserService queryUser function
+
+commit 2d1d8aad5e026dc0ea859299d5bb9bc3ebd02970
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Mon Feb 26 17:55:42 2024 +0800
+
+    comment：
+    1，query user
+    2, feed service
+    3, blog
+
+commit 64b907d46bc95fa81ba73d84e37d37b5994fcdd3
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Mon Feb 26 16:48:29 2024 +0800
+
+    comment：
+    1，login in\out
+    2, register
+    3, blog
+
+commit 6de9c66d26060f50ee526e352a70272a30b43771
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Sun Feb 25 21:34:35 2024 +0800
+
+    comments:
+    1,user relation follow unfollow dao\service support
+    2,some utils for up functions
+    3,blog service push
+
+commit cf69523b758b7537b363d02965968b1984173ffc
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Sun Feb 25 12:39:50 2024 +0800
+
+    comments:
+    1,user login dao\service support
+    2,logout dao\service support
+    3,register dao\service support
+    4,some utils for up functions
+
+commit 169c137af190fc02420a4f4e13ee0ff5fb6fc5d4
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Sat Feb 24 16:29:47 2024 +0800
+
+    test
+
+commit f4397c1625e94c72194f855a8f44a8f0da8fcf90
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Sat Feb 24 16:29:06 2024 +0800
+
+    test
+
+commit ade99755bfca35cf77da247aa54a8144e157e6c1
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Sat Feb 24 16:26:43 2024 +0800
+
+    test
+
+commit d6de2e43a4385e8c8d5a55b9a0dbaf07728e7a75
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Sat Feb 24 16:24:37 2024 +0800
+
+    Initial commit

@@ -28,7 +28,8 @@ Using SpringBoot 3.2.0
 4. imports the data files [mysql/data]  to mysql server
 5. Run com.moikiitos.MoikiitosApplication in IDEA. Or you can use [moikiitos-0.0.1-SNAPSHOT.jar] start the app
 6. Access link [http://127.0.0.1:8017/user/login.html]
-7. Use 
+7. Use Account 123456/123456 login
+8. Enjoy the app
 ## Usage
 
 1. Run the application using Maven: `mvn spring-boot:run`
@@ -40,6 +41,10 @@ Using SpringBoot 3.2.0
 
 The application uses the default configuration. If you need to configure the application, refer to
 resources/application.yml.
+
+# Git Commit log 
+
+Please check the file with log.txt in the root
 
 ## Support
 
