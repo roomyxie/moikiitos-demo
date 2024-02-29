@@ -1,6 +1,7 @@
 package com.moikiitos.controller;
 
 import com.moikiitos.common.enums.RelationReturnCode;
+import com.moikiitos.dao.model.User;
 import com.moikiitos.service.user.UserRelationService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
