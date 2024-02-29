@@ -1,3 +1,18 @@
+commit 6d48e1975f0745c6836ce52b8869eee1d37c33a6
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Thu Feb 29 15:26:53 2024 +0800
+
+    comment：
+    1, Fixed follow list view problems
+    2, Added some details to README.md
+
+commit 819e1257e150c657edc4052bc1c1ac5e6663560b
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Thu Feb 29 15:13:00 2024 +0800
+
+    comment：
+    1, Updated Git commit log
+
 commit c06e7b4e6b31d0906e65ef99c62c257a2441bfea
 Author: roomyxie <roomy.zw@hotmail.com>
 Date:   Thu Feb 29 15:12:23 2024 +0800
