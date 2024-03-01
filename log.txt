@@ -1,3 +1,25 @@
+commit 85d94b73a0a53f390f53be42f4fd1425a219c106
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Thu Feb 29 21:37:24 2024 +0800
+
+    comments:
+    1,Updated front login js and register files
+
+commit fc78af4fb933a9486097c4bf915c4594e3613d70
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Thu Feb 29 18:06:53 2024 +0800
+
+    comment：
+    1, Optimize service status
+    2, Optimize front file
+
+commit 395a53c45e3f51f232c31293f224711a3d6f8fd8
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Thu Feb 29 15:27:27 2024 +0800
+
+    comment：
+    1, Added some git commit log to log.txt
+
 commit 6d48e1975f0745c6836ce52b8869eee1d37c33a6
 Author: roomyxie <roomy.zw@hotmail.com>
 Date:   Thu Feb 29 15:26:53 2024 +0800

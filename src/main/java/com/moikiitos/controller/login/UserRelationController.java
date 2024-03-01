@@ -1,5 +1,6 @@
 package com.moikiitos.controller.login;
 
+import com.alibaba.fastjson.JSON;
 import com.moikiitos.common.PrintUrlAnno;
 import com.moikiitos.common.enums.RelationReturnCode;
 import com.moikiitos.common.enums.ReturnCode;
@@ -11,6 +12,7 @@ import com.moikiitos.service.result.WebResult;
 import com.moikiitos.service.user.UserRelationService;
 import com.moikiitos.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user/relation")
+@Slf4j
 public class UserRelationController {
     @Autowired
     HttpServletRequest request;
@@ -53,6 +56,8 @@ public class UserRelationController {
         if (currentUserId.equals(followeeId)) {
             return new WebResult(RelationReturnCode.FOLLOW_SAME_FAIL.getCode(), RelationReturnCode.FOLLOW_SAME_FAIL.getMessage());
         }
+        log.debug("follow req: " + JSON.toJSON(req));
+
 
         ReturnCode returnCode = userRelationService.follow(currentUserId, followeeId);
         return new WebResult(returnCode.getCode(), returnCode.getMessage());
@@ -83,6 +88,8 @@ public class UserRelationController {
         if (currentUserId.equals(followerId)) {
             return new WebResult(RelationReturnCode.UN_FOLLOW_SAME_FAIL.getCode(), RelationReturnCode.UN_FOLLOW_SAME_FAIL.getMessage());
         }
+        log.debug("unfollow req: " + JSON.toJSON(req));
+
 
         ReturnCode returnCode = userRelationService.unfollow(currentUserId, followerId);
         return new WebResult(returnCode.getCode(), returnCode.getMessage());
@@ -105,6 +112,8 @@ public class UserRelationController {
         if (userId == null) {
             return new WebResult(WebResult.RESULT_FAIL, "get followee list failed, userId empty");
         }
+        log.debug("listFollower userId: " + userId);
+
         List<User> users = userRelationService.listFollower(userId);
 
         return new WebResult(WebResult.RESULT_SUCCESS, "get follower list success", users);
@@ -122,9 +131,12 @@ public class UserRelationController {
     @PrintUrlAnno
     @GetMapping("/followee/list")
     public BaseResult listFollowee(@RequestParam Long userId) {
+        log.debug("listFollowee userId: " + userId);
+
         if (userId == null) {
             return new WebResult(WebResult.RESULT_FAIL, "get followee list failed, userId empty");
         }
+
         List<User> users = userRelationService.listFollowee(userId);
 
         return new WebResult(WebResult.RESULT_SUCCESS, "get followee list success", users);

@@ -33,6 +33,8 @@ public class BlogController {
     @PostMapping("/list")
     public BaseResult queryBlog(@RequestBody BlogListReq req) {
 
+        log.debug("queryBlog req: " + JSON.toJSON(req));
+
         String type = req.getType();
         int page = req.getPage();
         int count = req.getCount();
@@ -46,7 +48,6 @@ public class BlogController {
             count = Integer.MAX_VALUE;
         }
 
-        log.debug("queryBlog....");
         List<BlogInfoDto> blogInfoDtos = blogService.queryBlog(type, req.getCurrentUserId(), req.getSearchUserId(), page, count);
 
         return new WebResult(BlogReturnCode.BLOG_QUERY_SUCCESS.getCode(),
@@ -57,12 +58,13 @@ public class BlogController {
     @PostMapping("/post")
     public BaseResult postBlog(@RequestBody BlogPostReq req) {
 
+        log.debug("postBlog:" + JSON.toJSON(req));
+
         //error check
         if (req.getUserId() == null || Strings.isEmpty(req.getContent())) {
             return new WebResult(BlogReturnCode.ERROR_PARAM.getCode(),
                     BlogReturnCode.ERROR_PARAM.getMessage());
         }
-        log.debug("postBlog:" + JSON.toJSON(req));
         blogService.submit(req.getContent(), req.getUserId());
 
         return new WebResult(BlogReturnCode.BLOG_SUBMIT_SUCCESS.getCode(),

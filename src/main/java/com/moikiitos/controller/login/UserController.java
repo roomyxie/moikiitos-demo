@@ -1,5 +1,6 @@
 package com.moikiitos.controller.login;
 
+import com.alibaba.fastjson.JSON;
 import com.moikiitos.common.PrintUrlAnno;
 import com.moikiitos.common.enums.UserReturnCode;
 import com.moikiitos.controller.vo.UserLoginReq;
@@ -34,6 +35,8 @@ public class UserController {
     @PostMapping("/login")
     public BaseResult login(@RequestBody UserLoginReq req) {
 
+        log.debug("login = " + JSON.toJSON(req));
+
         BaseResult result = null;
 
         String loginName = req.getName();
@@ -44,8 +47,6 @@ public class UserController {
             result = new WebResult(UserReturnCode.ERROR_PARAM.getCode(), UserReturnCode.ERROR_PARAM.getMessage());
             return result;
         }
-
-        log.debug("loginName = " + loginName + "  loginPassword = " + loginPassword);
 
         //do login
         return loginService.login(loginName, loginPassword);
@@ -64,11 +65,11 @@ public class UserController {
     @PostMapping("/register")
     public BaseResult register(@RequestBody UserRegisterReq req) {
 
+        log.debug("register req: " + JSON.toJSON(req));
+
         String registerName = req.getName();
         String email = req.getEmail();
         String registerPassword = req.getPassword();
-
-        log.debug("registerName = " + registerName + "  registerPassword = " + registerPassword);
 
         //do register
         UserReturnCode returnCode = loginService.register(registerName, email, registerPassword);
