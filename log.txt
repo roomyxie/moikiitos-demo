@@ -1,3 +1,27 @@
+commit 6215e573899441d064614f434b1621ea5daaed35
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Fri Mar 1 10:39:54 2024 +0800
+
+    comment：
+    1, Update README.md change password
+
+commit 213790ddae372c0e13b72adaa168e7c07d5e9d8c
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Fri Mar 1 10:37:52 2024 +0800
+
+    comment：
+    1, Merge mysql DDL file
+    2, Import new data from mysql
+
+commit 8ca958bf008f0c097fde56853b37b3537fe51245
+Author: roomyxie <roomy.zw@hotmail.com>
+Date:   Fri Mar 1 10:28:30 2024 +0800
+
+    comment：
+    1, Added print debug log
+    2, Added git commit log
+    3, Added README.md
+
 commit 85d94b73a0a53f390f53be42f4fd1425a219c106
 Author: roomyxie <roomy.zw@hotmail.com>
 Date:   Thu Feb 29 21:37:24 2024 +0800
