@@ -33,7 +33,7 @@ Using SpringBootTest and MockMvc modules
 4. imports the data files [mysql/data/data.sql]  to mysql server
 5. Run com.moikiitos.MoikiitosApplication in IDEA. Or you can use [moikiitos-0.0.1-SNAPSHOT.jar] start the app
 6. Access link [http://127.0.0.1:8017/user/login.html]
-7. Use Account Tom/123456 or Jimmy/1234567 to login
+7. Use Account Tom/1234 or Jimmy/1234567 to login
 8. Enjoy the app
 
 ## Usage
