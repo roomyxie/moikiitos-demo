@@ -1,3 +1,8 @@
+
+
+CREATE DATABASE moikiitos;
+
+
 -- moikiitos.blog definition
 
 CREATE TABLE `blog` (
